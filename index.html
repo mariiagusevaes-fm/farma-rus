@@ -1,360 +1,430 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>МожноМаме — безопасно при беременности и ГВ</title>
+<title>МожноЛи</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<meta name="theme-color" content="#5C7A3E">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="МожноЛи">
+<meta name="theme-color" content="#7BAE6E">
 <style>
 :root {
-  --birch: #6B9E5E;
-  --birch-dark: #4A7A5A;  --birch-mid: #8BBE7A;
-  --birch-light: #C8E6B8;
-  --birch-pale: #EEF7E8;
-  --cream: #FAF9F5;
-  --warm: #F6F1E9;
-  --warm-border: #E8E2D8;
-  --bark: #7C6545;
-  --bark-light: #D4C4A8;
-  --green-bg: #EAF4E4; --green-txt: #3A7A2E;
-  --amber-bg: #FFF4DC; --amber-txt: #B45309;
-  --red-bg: #FFECEC; --red-txt: #C0392B;
-  --text: #1E2A14;
-  --text-mid: #4A5E35;
-  --text-soft: #6E7F58;
-  --text-light: #9EAD88;
-  --shadow: 0 4px 24px rgba(60,84,30,0.08);
-  --shadow-lg: 0 12px 40px rgba(60,84,30,0.12);
+  /* FIX 3: значительно светлее и приятнее — терракотово-зелёная палитра */
+  --birch: #7BAE6E;
+  --birch-dark: #5A8C4E;
+  --birch-mid: #8EBF80;
+  --birch-light: #C8E2BC;
+  --birch-pale: #F0F8EB;
+  --cream: #FDFCF8;
+  --warm: #F8F3EA;
+  --warm-border: #E8E0D0;
+  --bark: #9C7E5A;
+  --bark-light: #DDD0BC;
+  --green-bg: #EBF5E4; --green-txt: #357A26;
+  --amber-bg: #FFF6E0; --amber-txt: #B06020;
+  --red-bg: #FFEFEF; --red-txt: #C0392B;
+  --text: #2A3520;
+  --text-mid: #526040;
+  --text-soft: #748060;
+  --text-light: #A8B898;
+  --shadow: 0 4px 20px rgba(80,110,50,0.08);
+  --shadow-lg: 0 10px 36px rgba(80,110,50,0.12);
   --r: 18px;
   --r-sm: 10px;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+- { margin:0; padding:0; box-sizing:border-box; }
 
 body {
-  font-family: 'Manrope', sans-serif;
-  background: var(--cream);
-  color: var(--text);
-  min-height: 100vh;
+font-family: ‘Manrope’, sans-serif;
+background: var(–cream);
+color: var(–text);
+min-height: 100vh;
 }
+
+.kormilitsa-badge {
+display: flex;
+align-items: center;
+gap: 7px;
+background: rgba(255,255,255,0.12);
+border: 1px solid rgba(255,255,255,0.25);
+border-radius: 20px;
+padding: 5px 12px 5px 8px;
+transition: background 0.2s;
+}
+.kormilitsa-link:hover .kormilitsa-badge {
+background: rgba(255,255,255,0.22);
+}
+.korm-icon { font-size: 20px; line-height: 1; }
+.korm-name {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 14px;
+font-weight: 500;
+font-style: italic;
+color: #fff;
+line-height: 1.2;
+}
+.korm-sub {
+font-size: 9px;
+font-weight: 600;
+color: rgba(255,255,255,0.6);
+letter-spacing: 0.5px;
+text-transform: uppercase;
+line-height: 1;
+}
+
+.kormilitsa-link {
+display: flex;
+align-items: center;
+text-decoration: none;
+flex-shrink: 0;
+opacity: 0.9;
+transition: opacity 0.2s;
+gap: 6px;
+}
+.kormilitsa-link:hover { opacity: 1; }
+.kormilitsa-logo-text {
+font-size: 11px;
+font-weight: 700;
+color: rgba(255,255,255,0.85);
+letter-spacing: 1px;
+text-transform: uppercase;
+white-space: nowrap;
+}
+
+/* CLICK FIX: ensure all interactive elements are above decorative layers */
+.search-wrap { position: relative; z-index: 10; }
+.type-filter { position: relative; z-index: 10; }
+.situation-tabs { position: relative; z-index: 10; }
+.search-box { position: relative; z-index: 10; }
+.quick-chips { position: relative; z-index: 10; }
+.cat-card { position: relative; z-index: 1; }
+.chip { position: relative; z-index: 1; }
+.type-btn { position: relative; z-index: 1; }
+.tab { position: relative; z-index: 1; }
 
 /* ── ШАПКА ── */
 header {
-  background: var(--birch-dark);
-  padding: 0 20px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  gap: 12px;
+background: var(–birch-dark);
+padding: 0 20px;
+height: 60px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+position: sticky;
+top: 0;
+z-index: 100;
+gap: 12px;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  cursor: pointer;
+display: flex;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+cursor: pointer;
 }
 
 .logo-icon {
-  width: 36px; height: 36px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  font-size: 19px;
-  border: 1px solid rgba(255,255,255,0.2);
+width: 36px; height: 36px;
+background: rgba(255,255,255,0.15);
+border-radius: 10px;
+display: grid;
+place-items: center;
+font-size: 19px;
+border: 1px solid rgba(255,255,255,0.2);
 }
 
 .logo-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 500;
-  color: #fff;
-  letter-spacing: 0.2px;
-  line-height: 1;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 22px;
+font-weight: 500;
+color: #fff;
+letter-spacing: 0.2px;
+line-height: 1;
 }
 
 .logo-text span {
-  color: var(--birch-light);
-  font-style: italic;
+color: var(–birch-light);
+font-style: italic;
 }
 
 .header-badge {
-  font-size: 11px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.65);
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 4px 12px;
-  border-radius: 20px;
-  white-space: nowrap;
-  letter-spacing: 0.3px;
+font-size: 11px;
+font-weight: 600;
+color: rgba(255,255,255,0.65);
+background: rgba(255,255,255,0.1);
+border: 1px solid rgba(255,255,255,0.2);
+padding: 4px 12px;
+border-radius: 20px;
+white-space: nowrap;
+letter-spacing: 0.3px;
 }
 
 /* ── ГЕРОЙ ── */
 .hero {
-  background: linear-gradient(160deg, #4A7A5A 0%, #6B9E5E 50%, #8BBE7A 100%);
-  padding: 40px 20px 32px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+background: linear-gradient(160deg, #6A9E5C 0%, #88BB78 45%, #A8CF98 100%);
+padding: 40px 20px 32px;
+text-align: center;
+position: relative;
 }
 
 .hero::before {
-  content: '🌿';
-  position: absolute;
-  right: -20px; top: -30px;
-  font-size: 220px;
-  opacity: 0.06;
-  transform: rotate(-20deg);
-  pointer-events: none;
-  line-height: 1;
+pointer-events: none !important;
+content: ‘🌿’;
+position: absolute;
+right: -20px; top: -30px;
+font-size: 220px;
+opacity: 0.06;
+transform: rotate(-20deg);
+pointer-events: none;
+line-height: 1;
 }
 
 .hero::after {
-  content: '🌾';
-  position: absolute;
-  left: -30px; bottom: -20px;
-  font-size: 160px;
-  opacity: 0.05;
-  transform: rotate(15deg);
-  pointer-events: none;
-  line-height: 1;
+pointer-events: none !important;
+content: ‘🌾’;
+position: absolute;
+left: -30px; bottom: -20px;
+font-size: 160px;
+opacity: 0.05;
+transform: rotate(15deg);
+pointer-events: none;
+line-height: 1;
 }
 
 .hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--birch-light);
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 5px 14px;
-  border-radius: 20px;
-  margin-bottom: 18px;
+display: inline-flex;
+align-items: center;
+gap: 6px;
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–birch-light);
+background: rgba(255,255,255,0.1);
+border: 1px solid rgba(255,255,255,0.2);
+padding: 5px 14px;
+border-radius: 20px;
+margin-bottom: 18px;
 }
 
 .hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(26px, 5.5vw, 44px);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.15;
-  color: #fff;
-  margin-bottom: 10px;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: clamp(26px, 5.5vw, 44px);
+font-weight: 400;
+font-style: italic;
+line-height: 1.15;
+color: #fff;
+margin-bottom: 10px;
+max-width: 500px;
+margin-left: auto;
+margin-right: auto;
 }
 
 .hero h1 strong {
-  font-style: normal;
-  font-weight: 600;
-  color: var(--birch-light);
+font-style: normal;
+font-weight: 600;
+color: var(–birch-light);
 }
 
 .hero p {
-  font-size: 14px;
-  color: rgba(255,255,255,0.72);
-  max-width: 420px;
-  margin: 0 auto 28px;
-  line-height: 1.65;
-  font-weight: 300;
+font-size: 14px;
+color: rgba(255,255,255,0.72);
+max-width: 420px;
+margin: 0 auto 28px;
+line-height: 1.65;
+font-weight: 300;
 }
 
 /* ── ФИЛЬТР ТИПА ── */
 .search-wrap { max-width: 660px; margin: 0 auto; }
 
 .type-filter {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
+display: flex;
+gap: 6px;
+margin-bottom: 12px;
+justify-content: center;
+flex-wrap: wrap;
 }
 
 .type-btn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 14px;
-  border-radius: 30px;
-  font-size: 12px;
-  font-weight: 600;
-  border: 1.5px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.8);
-  cursor: pointer;
-  font-family: 'Manrope', sans-serif;
-  transition: all 0.2s;
-  white-space: nowrap;
-  letter-spacing: 0.2px;
+display: flex;
+align-items: center;
+gap: 5px;
+padding: 6px 14px;
+border-radius: 30px;
+font-size: 12px;
+font-weight: 600;
+border: 1.5px solid rgba(255,255,255,0.3);
+background: rgba(255,255,255,0.1);
+color: rgba(255,255,255,0.8);
+cursor: pointer;
+font-family: ‘Manrope’, sans-serif;
+transition: all 0.2s;
+white-space: nowrap;
+letter-spacing: 0.2px;
 }
 
 .type-btn.active, .type-btn:hover {
-  background: white;
-  color: var(--birch-dark);
-  border-color: white;
+background: white;
+color: var(–birch-dark);
+border-color: white;
 }
 
 /* ── СИТУАЦИЯ ── */
 .situation-tabs {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
+display: flex;
+gap: 6px;
+margin-bottom: 12px;
+justify-content: center;
+flex-wrap: wrap;
 }
 
 .tab {
-  padding: 8px 16px;
-  border-radius: 30px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1.5px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.85);
-  font-family: 'Manrope', sans-serif;
-  transition: all 0.2s;
-  white-space: nowrap;
+padding: 8px 16px;
+border-radius: 30px;
+font-size: 13px;
+font-weight: 600;
+cursor: pointer;
+border: 1.5px solid rgba(255,255,255,0.3);
+background: rgba(255,255,255,0.1);
+color: rgba(255,255,255,0.85);
+font-family: ‘Manrope’, sans-serif;
+transition: all 0.2s;
+white-space: nowrap;
 }
 
 .tab.active {
-  background: #fff;
-  color: var(--birch-dark);
-  border-color: #fff;
+background: #fff;
+color: var(–birch-dark);
+border-color: #fff;
 }
 
 .tab:hover:not(.active) {
-  background: rgba(255,255,255,0.2);
+background: rgba(255,255,255,0.2);
 }
 
 /* ── ПОИСК ── */
 .search-box {
-  background: white;
-  border-radius: 50px;
-  border: 2px solid transparent;
-  box-shadow: var(--shadow-lg);
-  padding: 6px 6px 6px 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: box-shadow 0.2s;
+background: white;
+border-radius: 50px;
+border: 2px solid transparent;
+box-shadow: var(–shadow-lg);
+padding: 6px 6px 6px 20px;
+display: flex;
+align-items: center;
+gap: 10px;
+transition: box-shadow 0.2s;
 }
 
 .search-box:focus-within {
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.4), var(--shadow-lg);
+box-shadow: 0 0 0 3px rgba(255,255,255,0.4), var(–shadow-lg);
 }
 
 .search-icon { font-size: 17px; opacity: 0.35; flex-shrink: 0; }
 
 .search-box input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-family: 'Manrope', sans-serif;
-  font-size: 15px;
-  color: var(--text);
-  background: transparent;
-  padding: 7px 0;
+flex: 1;
+border: none;
+outline: none;
+font-family: ‘Manrope’, sans-serif;
+font-size: 15px;
+color: var(–text);
+background: transparent;
+padding: 7px 0;
 }
 
 .search-box input::placeholder { color: #BBC4AA; }
 
 .search-btn {
-  background: var(--birch-dark);
-  color: white;
-  border: none;
-  border-radius: 40px;
-  padding: 10px 22px;
-  font-family: 'Manrope', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-  flex-shrink: 0;
+background: var(–birch-dark);
+color: white;
+border: none;
+border-radius: 40px;
+padding: 10px 22px;
+font-family: ‘Manrope’, sans-serif;
+font-size: 13px;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s;
+white-space: nowrap;
+flex-shrink: 0;
 }
-.search-btn:hover { background: var(--birch); transform: translateY(-1px); }
+.search-btn:hover { background: var(–birch); transform: translateY(-1px); }
 
 /* ── БЫСТРЫЕ ЧИПЫ ── */
 .quick-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 12px;
-  justify-content: center;
+display: flex;
+flex-wrap: wrap;
+gap: 6px;
+margin-top: 12px;
+justify-content: center;
 }
 
 .chip {
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 20px;
-  padding: 4px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.85);
-  cursor: pointer;
-  transition: all 0.15s;
-  font-family: 'Manrope', sans-serif;
+background: rgba(255,255,255,0.15);
+border: 1px solid rgba(255,255,255,0.25);
+border-radius: 20px;
+padding: 4px 12px;
+font-size: 12px;
+font-weight: 600;
+color: rgba(255,255,255,0.85);
+cursor: pointer;
+transition: all 0.15s;
+font-family: ‘Manrope’, sans-serif;
 }
 .chip:hover { background: rgba(255,255,255,0.3); }
 
 /* ── MAIN ── */
 main {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 28px 16px calc(60px + env(safe-area-inset-bottom));
+max-width: 720px;
+margin: 0 auto;
+padding: 28px 16px calc(60px + env(safe-area-inset-bottom));
 }
 
 /* ── КАРТОЧКА РЕЗУЛЬТАТА ── */
 .result-card {
-  background: white;
-  border-radius: var(--r);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--warm-border);
-  overflow: hidden;
-  margin-bottom: 14px;
-  animation: slideUp 0.3s ease;
+background: white;
+border-radius: var(–r);
+box-shadow: var(–shadow);
+border: 1px solid var(–warm-border);
+overflow: hidden;
+margin-bottom: 14px;
+animation: slideUp 0.3s ease;
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
 }
 
 .result-header {
-  padding: 18px 20px 14px;
-  border-bottom: 1px solid #F0EDE6;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
+padding: 18px 20px 14px;
+border-bottom: 1px solid #F0EDE6;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 14px;
 }
 
 .type-stripe {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  padding: 3px 9px;
-  border-radius: 20px;
-  margin-bottom: 7px;
-  width: fit-content;
+display: inline-flex;
+align-items: center;
+gap: 5px;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 0.8px;
+text-transform: uppercase;
+padding: 3px 9px;
+border-radius: 20px;
+margin-bottom: 7px;
+width: fit-content;
 }
 
 .type-stripe.лекарство { background: #E8F2E0; color: #2E6B22; }
@@ -364,215 +434,224 @@ main {
 .type-stripe.напиток { background: #E8F0FF; color: #2E5CA6; }
 
 .result-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 23px;
-  font-weight: 500;
-  color: var(--text);
-  line-height: 1.2;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 23px;
+font-weight: 500;
+color: var(–text);
+line-height: 1.2;
 }
 
-.result-category { font-size: 12px; color: var(--text-soft); margin-top: 3px; }
-.result-trade { font-size: 12px; color: var(--birch-mid); margin-top: 5px; font-weight: 600; }
+.result-category { font-size: 12px; color: var(–text-soft); margin-top: 3px; }
+.result-trade { font-size: 12px; color: var(–birch-mid); margin-top: 5px; font-weight: 600; }
 
 .safety-badges { display: flex; flex-direction: column; gap: 5px; flex-shrink: 0; }
 
 .badge {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
-  white-space: nowrap;
+display: flex;
+align-items: center;
+gap: 5px;
+padding: 5px 10px;
+border-radius: 20px;
+font-size: 11px;
+font-weight: 700;
+white-space: nowrap;
 }
-.badge.green { background: var(--green-bg); color: var(--green-txt); }
-.badge.yellow { background: var(--amber-bg); color: var(--amber-txt); }
-.badge.red { background: var(--red-bg); color: var(--red-txt); }
+.badge.green { background: var(–green-bg); color: var(–green-txt); }
+.badge.yellow { background: var(–amber-bg); color: var(–amber-txt); }
+.badge.red { background: var(–red-bg); color: var(–red-txt); }
 
 .result-section { padding: 14px 20px; border-bottom: 1px solid #F5F2EC; }
 .result-section:last-child { border-bottom: none; }
 
 .section-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--birch-mid);
-  margin-bottom: 7px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 1px;
+text-transform: uppercase;
+color: var(–birch-mid);
+margin-bottom: 7px;
+display: flex;
+align-items: center;
+gap: 5px;
 }
 
 .section-text { font-size: 14px; line-height: 1.65; color: #2A3820; }
 
 .interactions-list {
-  font-size: 12.5px;
-  color: var(--text-soft);
-  background: var(--birch-pale);
-  border-radius: 8px;
-  padding: 10px 14px;
-  line-height: 1.6;
+font-size: 12.5px;
+color: var(–text-soft);
+background: var(–birch-pale);
+border-radius: 8px;
+padding: 10px 14px;
+line-height: 1.6;
 }
 
 .source-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 .source-tags { display: flex; flex-wrap: wrap; gap: 5px; }
 
 .source-tag {
-  font-size: 10px;
-  background: white;
-  border: 1px solid var(--birch-light);
-  color: var(--birch-mid);
-  padding: 2px 8px;
-  border-radius: 20px;
-  font-weight: 600;
+font-size: 10px;
+background: white;
+border: 1px solid var(–birch-light);
+color: var(–birch-mid);
+padding: 2px 8px;
+border-radius: 20px;
+font-weight: 600;
 }
 
-.expert-check { font-size: 11px; color: var(--green-txt); font-weight: 700; flex-shrink: 0; }
+.expert-check { font-size: 11px; color: var(–green-txt); font-weight: 700; flex-shrink: 0; }
 
 .save-btn {
-  margin-top: 10px; width: 100%; background: none;
-  border: 1.5px dashed var(--birch-light); border-radius: 8px; padding: 8px;
-  font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600;
-  color: var(--birch); cursor: pointer; transition: all 0.2s;
+margin-top: 10px; width: 100%; background: none;
+border: 1.5px dashed var(–birch-light); border-radius: 8px; padding: 8px;
+font-family: ‘Manrope’, sans-serif; font-size: 12px; font-weight: 600;
+color: var(–birch); cursor: pointer; transition: all 0.2s;
 }
-.save-btn:hover { background: var(--birch-pale); border-color: var(--birch); }
+.save-btn:hover { background: var(–birch-pale); border-color: var(–birch); }
 
 .disclaimer {
-  background: var(--warm);
-  border: 1px solid var(--warm-border);
-  border-radius: var(--r-sm);
-  padding: 14px 18px;
-  font-size: 12px;
-  color: var(--text-soft);
-  line-height: 1.6;
-  margin-top: 6px;
-  display: flex;
-  gap: 9px;
-  align-items: flex-start;
+background: var(–warm);
+border: 1px solid var(–warm-border);
+border-radius: var(–r-sm);
+padding: 14px 18px;
+font-size: 12px;
+color: var(–text-soft);
+line-height: 1.6;
+margin-top: 6px;
+display: flex;
+gap: 9px;
+align-items: flex-start;
 }
 
 /* ── ПУСТОЙ ЭКРАН ── */
 .empty-state { text-align: center; padding: 36px 16px; }
 .empty-icon { font-size: 52px; margin-bottom: 12px; opacity: 0.4; }
 .empty-state h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 8px;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 22px;
+font-weight: 500;
+color: var(–text);
+margin-bottom: 8px;
 }
-.empty-state p { font-size: 13px; color: var(--text-soft); max-width: 280px; margin: 0 auto; line-height: 1.6; }
+.empty-state p { font-size: 13px; color: var(–text-soft); max-width: 280px; margin: 0 auto; line-height: 1.6; }
 
 .not-found {
-  background: white; border: 1px solid var(--warm-border);
-  border-radius: var(--r); padding: 28px; text-align: center; box-shadow: var(--shadow);
+background: white; border: 1px solid var(–warm-border);
+border-radius: var(–r); padding: 28px; text-align: center; box-shadow: var(–shadow);
 }
-.not-found p { color: var(--text-soft); font-size: 14px; line-height: 1.6; }
+.not-found p { color: var(–text-soft); font-size: 14px; line-height: 1.6; }
 
 /* ── КАТЕГОРИИ ── */
 .categories { margin-top: 22px; }
 
 .categories-title {
-  font-size: 11px; font-weight: 700; color: var(--birch-mid);
-  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;
+font-size: 11px; font-weight: 700; color: var(–birch-mid);
+letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;
 }
 
 .cat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 8px;
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+gap: 8px;
 }
 
 .cat-card {
-  background: white; border: 1px solid var(--warm-border);
-  border-radius: var(--r-sm); padding: 12px 14px; cursor: pointer;
-  transition: all 0.2s; display: flex; align-items: center; gap: 8px;
-  min-width: 0; overflow: hidden;
+background: white; border: 1px solid var(–warm-border);
+border-radius: var(–r-sm); padding: 12px 14px; cursor: pointer;
+transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+min-width: 0; overflow: hidden;
 }
-.cat-card:hover { border-color: var(--birch); box-shadow: var(--shadow); transform: translateY(-1px); }
+.cat-card:hover { border-color: var(–birch); box-shadow: var(–shadow); transform: translateY(-1px); }
 .cat-card-icon { font-size: 18px; flex-shrink: 0; }
-.cat-card-name { font-size: 12px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cat-card-name { font-size: 12px; font-weight: 600; color: var(–text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ── ПАНЕЛИ ИСТОРИЯ/СОХРАНЕНО ── */
 .panel-section {
-  margin-top: 18px; background: white; border-radius: var(--r);
-  border: 1px solid var(--warm-border); box-shadow: var(--shadow); overflow: hidden;
+margin-top: 18px; background: white; border-radius: var(–r);
+border: 1px solid var(–warm-border); box-shadow: var(–shadow); overflow: hidden;
 }
 
 .panel-header {
-  padding: 11px 16px; background: var(--birch-pale);
-  display: flex; align-items: center; justify-content: space-between;
-  cursor: pointer; border-bottom: 1px solid var(--birch-light);
+padding: 11px 16px; background: var(–birch-pale);
+display: flex; align-items: center; justify-content: space-between;
+cursor: pointer; border-bottom: 1px solid var(–birch-light);
 }
 
-.panel-header-title { font-size: 11px; font-weight: 700; color: var(--birch); display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.8px; }
-.panel-toggle { font-size: 11px; color: var(--text-soft); }
+.panel-header-title { font-size: 11px; font-weight: 700; color: var(–birch); display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.8px; }
+.panel-toggle { font-size: 11px; color: var(–text-soft); }
 .panel-body { padding: 10px 12px; }
 .panel-body.hidden { display: none; }
 
 .history-item {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 7px 10px; border-radius: 8px; cursor: pointer; transition: background 0.15s; gap: 8px;
+display: flex; align-items: center; justify-content: space-between;
+padding: 7px 10px; border-radius: 8px; cursor: pointer; transition: background 0.15s; gap: 8px;
 }
-.history-item:hover { background: var(--birch-pale); }
-.history-item-text { font-size: 13px; color: var(--text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.history-item-time { font-size: 10px; color: var(--text-light); flex-shrink: 0; }
+.history-item:hover { background: var(–birch-pale); }
+.history-item-text { font-size: 13px; color: var(–text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.history-item-time { font-size: 10px; color: var(–text-light); flex-shrink: 0; }
 
 .saved-item {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 7px 10px; border-radius: 8px; cursor: pointer; transition: background 0.15s; gap: 8px;
+display: flex; align-items: center; justify-content: space-between;
+padding: 7px 10px; border-radius: 8px; cursor: pointer; transition: background 0.15s; gap: 8px;
 }
-.saved-item:hover { background: var(--birch-pale); }
-.saved-item-name { font-size: 13px; font-weight: 600; color: var(--text); flex: 1; }
+.saved-item:hover { background: var(–birch-pale); }
+.saved-item-name { font-size: 13px; font-weight: 600; color: var(–text); flex: 1; }
 .saved-item-badge { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 700; flex-shrink: 0; }
-.saved-item-badge.green { background: var(--green-bg); color: var(--green-txt); }
-.saved-item-badge.yellow { background: var(--amber-bg); color: var(--amber-txt); }
-.saved-item-badge.red { background: var(--red-bg); color: var(--red-txt); }
+.saved-item-badge.green { background: var(–green-bg); color: var(–green-txt); }
+.saved-item-badge.yellow { background: var(–amber-bg); color: var(–amber-txt); }
+.saved-item-badge.red { background: var(–red-bg); color: var(–red-txt); }
 
 .remove-btn {
-  background: none; border: none; font-size: 13px; cursor: pointer;
-  opacity: 0.3; padding: 2px 4px; border-radius: 4px; transition: opacity 0.15s; flex-shrink: 0;
+background: none; border: none; font-size: 13px; cursor: pointer;
+opacity: 0.3; padding: 2px 4px; border-radius: 4px; transition: opacity 0.15s; flex-shrink: 0;
 }
 .remove-btn:hover { opacity: 1; }
 
-.empty-panel { text-align: center; padding: 12px; font-size: 12px; color: var(--text-soft); }
+.empty-panel { text-align: center; padding: 12px; font-size: 12px; color: var(–text-soft); }
 
 .clear-btn {
-  margin-top: 8px; width: 100%; background: none;
-  border: 1.5px solid #F5C0C0; border-radius: 8px; padding: 8px;
-  font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600;
-  color: #C62828; cursor: pointer; transition: all 0.2s;
+margin-top: 8px; width: 100%; background: none;
+border: 1.5px solid #F5C0C0; border-radius: 8px; padding: 8px;
+font-family: ‘Manrope’, sans-serif; font-size: 12px; font-weight: 600;
+color: #C62828; cursor: pointer; transition: all 0.2s;
 }
 .clear-btn:hover { background: #FFF0F0; }
 
 /* ── МОБИЛЬНЫЙ ── */
 @media (max-width: 600px) {
-  header { padding: 0 14px; }
-  .hero { padding: 28px 14px 26px; }
-  .cat-grid { grid-template-columns: repeat(2, 1fr); }
-  .result-header { flex-direction: column; }
-  .safety-badges { flex-direction: row; flex-wrap: wrap; }
-  .result-section { padding: 12px 14px; }
-  .result-name { font-size: 20px; }
-  main { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+header { padding: 0 14px; }
+.hero { padding: 28px 14px 26px; }
+.cat-grid { grid-template-columns: repeat(2, 1fr); }
+.result-header { flex-direction: column; }
+.safety-badges { flex-direction: row; flex-wrap: wrap; }
+.result-section { padding: 12px 14px; }
+.result-name { font-size: 20px; }
+main { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
 }
 
 @media (max-width: 380px) {
-  .type-btn { font-size: 11px; padding: 5px 10px; }
-  .tab { font-size: 12px; padding: 7px 12px; }
+.type-btn { font-size: 11px; padding: 5px 10px; }
+.tab { font-size: 12px; padding: 7px 12px; }
 }
 </style>
+
 </head>
 <body>
 
 <header>
   <div class="logo" onclick="goHome()" title="На главную">
     <div class="logo-icon">🌿</div>
-    <div class="logo-text">Можно<span>Маме</span></div>
+    <div class="logo-text">Можно<span>Ли</span></div>
   </div>
-  <div class="header-badge">Для России 🇷🇺</div>
+  <a href="https://kormybaby.ru" target="_blank" class="kormilitsa-link" title="Центр помощи кормящим мамам — Кормилица">
+    <div class="kormilitsa-badge">
+      <span class="korm-icon">🤱</span>
+      <div class="korm-texts">
+        <div class="korm-name">Кормилица</div>
+        <div class="korm-sub">kormybaby.ru</div>
+      </div>
+    </div>
+  </a>
 </header>
 
 <div class="hero">
@@ -589,30 +668,33 @@ main {
       <button class="type-btn" onclick="setType('продукт',this)">🥗 Продукты</button>
     </div>
 
-    <div class="situation-tabs">
-      <button class="tab active" onclick="setSituation('gv',this)">🤱 Я кормлю грудью</button>
-      <button class="tab" onclick="setSituation('bere',this)">🤰 Я беременна</button>
-      <button class="tab" onclick="setSituation('both',this)">Оба случая</button>
-    </div>
+```
+<div class="situation-tabs">
+  <button class="tab active" onclick="setSituation('gv',this)">🤱 Я кормлю грудью</button>
+  <button class="tab" onclick="setSituation('bere',this)">🤰 Я беременна</button>
+  <button class="tab" onclick="setSituation('both',this)">Оба случая</button>
+</div>
 
-    <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput"
-        placeholder="Парацетамол, ромашка, красная рыба, Но-шпа…"
-        oninput="onInput(this.value)"
-        onkeydown="if(event.key==='Enter') doSearch()">
-      <button class="search-btn" onclick="doSearch()">Проверить</button>
-    </div>
+<div class="search-box">
+  <span class="search-icon">🔍</span>
+  <input type="text" id="searchInput"
+    placeholder="Парацетамол, ромашка, красная рыба, Но-шпа…"
+    oninput="onInput(this.value)"
+    onkeydown="if(event.key==='Enter') doSearch()">
+  <button class="search-btn" onclick="doSearch()">Проверить</button>
+</div>
 
-    <div class="quick-chips">
-      <span class="chip" onclick="quickSearch('Парацетамол')">Парацетамол</span>
-      <span class="chip" onclick="quickSearch('Но-шпа')">Но-шпа</span>
-      <span class="chip" onclick="quickSearch('Анальгин')">Анальгин</span>
-      <span class="chip" onclick="quickSearch('Ромашка')">Ромашка</span>
-      <span class="chip" onclick="quickSearch('Кофе')">Кофе</span>
-      <span class="chip" onclick="quickSearch('Семга')">Сёмга</span>
-      <span class="chip" onclick="quickSearch('Имбирь')">Имбирь</span>
-    </div>
+<div class="quick-chips">
+  <span class="chip" onclick="quickSearch('Парацетамол')">Парацетамол</span>
+  <span class="chip" onclick="quickSearch('Но-шпа')">Но-шпа</span>
+  <span class="chip" onclick="quickSearch('Анальгин')">Анальгин</span>
+  <span class="chip" onclick="quickSearch('Ромашка')">Ромашка</span>
+  <span class="chip" onclick="quickSearch('Кофе')">Кофе</span>
+  <span class="chip" onclick="quickSearch('Сёмга')">Сёмга</span>
+  <span class="chip" onclick="quickSearch('Имбирь')">Имбирь</span>
+</div>
+```
+
   </div>
 </div>
 
@@ -730,26 +812,6 @@ const DB = [
 
 { type:'лекарство', inn:'Линекс / Бифиформ', trade:'Линекс, Бифиформ, Аципол, Лактобактерин, Нормобакт', cat:'Пробиотик', sl:'green', se:'green', ll:'✅ Безопасно при ГВ', le:'✅ Безопасно при беременности', trim:'1–3 триместр', gl:'Полностью безопасны. Пробиотики действуют локально в кишечнике, не всасываются в кровь. Полезны при дисбиозе, после приёма антибиотиков.', ge:'Безопасны. Доказательная база неоднородна, но безопасность очень высокая. Помогают при запорах, вздутии, дисбиозе влагалища. Широко применяются в российском акушерстве.', ia:'Антибиотики (принимать через 2 часа после)', src:['ГРЛС','Видаль'], tags:['пробиотик','дисбиоз','кишечник','лекарство'] },
 
-{ type:'лекарство', inn:'Ибупрофен', trade:'Нурофен, Ибуфен, Ибупрофен, МИГ 400', cat:'НПВС / Жаропонижающее / Анальгетик', sl:'yellow', se:'yellow', ll:'⚠️ Допустим в первые месяцы ГВ', le:'⚠️ Избегать после 20 нед. беременности', trim:'Только 1–2 триместр, короткий курс', gl:'Препарат выбора при боли и температуре у кормящей (лучше парацетамола при воспалении). Переходит в молоко в ничтожных количествах — совместим с ГВ при разовом/кратком приёме.', ge:'НЕЛЬЗЯ после 20 недель — риск раннего закрытия артериального протока у плода и маловодие. В 1–2 триместрах допустим кратко при высокой температуре, если парацетамол не помог. Строго по назначению врача.', ia:'Варфарин, аспирин, кортикостероиды, литий, метотрексат', src:['ГРЛС','Видаль','LactMed','e-lactancia'], tags:['нпвс','температура','боль','ибупрофен','лекарство'] },
-
-{ type:'лекарство', inn:'Парацетамол', trade:'Панадол, Эффералган, Тайленол, Парацетамол', cat:'Анальгетик / Жаропонижающее', sl:'green', se:'green', ll:'✅ Препарат выбора при ГВ', le:'✅ Безопасно при беременности', trim:'1–3 триместр', gl:'Самое безопасное обезболивающее и жаропонижающее при кормлении. Переходит в молоко в минимальных количествах. ВОЗ и все крупные организации признают его препаратом выбора.', ge:'Препарат выбора при температуре и боли во всех триместрах. Не влияет на плаценту и кровоток плода. Не принимать более 4 г/сут. При заболеваниях печени — только с разрешения врача.', ia:'Варфарин (при длительном приёме усиливает эффект), алкоголь (гепатотоксичность)', src:['ВОЗ','ГРЛС','LactMed','Briggs'], tags:['анальгетик','температура','боль','парацетамол','лекарство'] },
-
-{ type:'лекарство', inn:'Нo-шпа (Дротаверин)', trade:'Но-шпа, Дротаверин', cat:'Спазмолитик миотропный', sl:'yellow', se:'yellow', ll:'⚠️ Данные ограничены, применять осторожно', le:'⚠️ Расслабляет матку — только по назначению', trim:'По назначению акушера', gl:'Широко применяется в российской практике при спазмах у кормящих. Специфических данных о переходе в молоко крайне мало. При необходимости — разово и по назначению.', ge:'Назначается акушерами при «тонусе матки», угрозе выкидыша. Доказательная база по эффективности спорна по международным стандартам, но безопасность приемлемая. Только по назначению.', ia:'Леводопа (ослабляет), другие спазмолитики (усиление эффекта)', src:['ГРЛС','Видаль'], tags:['спазмолитик','тонус','но-шпа','лекарство'] },
-
-{ type:'лекарство', inn:'Бисептол (Ко-тримоксазол)', trade:'Бисептол, Ко-тримоксазол, Бактрим', cat:'Антибиотик — сульфаниламид', sl:'yellow', se:'yellow', ll:'⚠️ Кратко допустим, наблюдать ребёнка', le:'⚠️ Избегать в 1-м и 3-м триместрах', trim:'Только 2-й триместр по показаниям', gl:'Переходит в молоко. Следить за желтухой и сыпью у малыша, особенно недоношенных. По возможности заменить на другой антибиотик. Применять только по назначению врача.', ge:'Противопоказан в 1-м триместре (антагонист фолата — риск ДНТ) и в 3-м триместре (риск желтухи у новорождённого). Во 2-м триместре — только по строгим показаниям при отсутствии альтернативы.', ia:'Варфарин, метотрексат, фенитоин, препараты с сульфонилмочевиной', src:['ГРЛС','LactMed','e-lactancia'], tags:['антибиотик','сульфаниламид','лекарство'] },
-
-{ type:'лекарство', inn:'Нистатин', trade:'Нистатин (таблетки, свечи, мазь)', cat:'Противогрибковый (полиен)', sl:'green', se:'green', ll:'✅ Безопасно при ГВ (местное применение)', le:'✅ Безопасно при беременности', trim:'1–3 триместр', gl:'Практически не всасывается из кишечника и со слизистых. Идеальный вариант при кандидозе у кормящей — в молоко не попадает. Широко применяется в России.', ge:'Не всасывается системно. Безопасен при местном применении во всех триместрах. Первая линия при молочнице влагалища во время беременности.', ia:'Без значимых взаимодействий', src:['ГРЛС','Видаль','e-lactancia'], tags:['противогрибковый','молочница','нистатин','лекарство'] },
-
-{ type:'лекарство', inn:'Хлоргексидин', trade:'Хлоргексидин, Мирамистин (схожий механизм)', cat:'Антисептик местный', sl:'green', se:'green', ll:'✅ Безопасно при местном применении', le:'✅ Безопасно при местном применении', trim:'1–3 триместр', gl:'Не всасывается через слизистые в клинически значимых количествах. Широко применяется при трещинах сосков (смывать перед кормлением), стоматите, обработке ран.', ge:'Системная биодоступность при местном применении ничтожна. Безопасен для обработки слизистых, полоскания горла и рта, обработки ран. Не глотать.', ia:'Мыло и анионные детергенты (инактивируют)', src:['ГРЛС','Видаль'], tags:['антисептик','хлоргексидин','мирамистин','лекарство'] },
-
-{ type:'лекарство', inn:'Виферон (Интерферон α-2b)', trade:'Виферон свечи, Виферон гель', cat:'Иммуномодулятор / Противовирусный', sl:'yellow', se:'yellow', ll:'⚠️ Данные ограничены', le:'⚠️ Разрешён с 14 нед. по ГРЛС', trim:'С 14 недель по показаниям', gl:'Популярен в России, но международная доказательная база крайне ограничена. Системное всасывание свечей минимально. Применять только по назначению врача.', ge:'По ГРЛС разрешён с 14 недель беременности. Международные гайдлайны не включают его в стандарты лечения ОРВИ. Эффективность при ОРВИ не подтверждена в Кокрейне. По назначению акушера.', ia:'Без значимых фармакологических взаимодействий', src:['ГРЛС','Видаль'], tags:['интерферон','вирус','виферон','лекарство'] },
-
-{ type:'лекарство', inn:'Пирацетам', trade:'Ноотропил, Луцетам, Пирацетам', cat:'Ноотроп / Нейропротектор', sl:'yellow', se:'yellow', ll:'⚠️ Данных недостаточно — избегать', le:'⚠️ Противопоказан по ряду источников', trim:'Избегать', gl:'Данных о безопасности при ГВ практически нет. Международные организации не рекомендуют его применение у кормящих из-за отсутствия доказательной базы.', ge:'Не рекомендован при беременности: отсутствие данных о тератогенности и безопасности. Широко назначался в постсоветских странах, но международные гайдлайны его не поддерживают. Применять только если альтернативы нет.', ia:'Антикоагулянты (усиливает эффект)', src:['ГРЛС','Видаль'], tags:['ноотроп','нейропротектор','лекарство'] },
-
-{ type:'лекарство', inn:'Актовегин', trade:'Актовегин таблетки, ампулы', cat:'Нейропротектор / Антигипоксант', sl:'yellow', se:'yellow', ll:'⚠️ Данных недостаточно', le:'⚠️ Применяется в России, данные спорны', trim:'Только по назначению', gl:'Популярен в российском акушерстве, однако международная доказательная база эффективности и безопасности крайне ограничена. По назначению врача.', ge:'Широко назначается при «плацентарной недостаточности» в России. Не включён в международные протоколы. Данных о тератогенности практически нет. Принимать только по назначению акушера.', ia:'Без значимых взаимодействий', src:['ГРЛС','Видаль'], tags:['нейропротектор','плацента','актовегин','лекарство'] },
-
-{ type:'лекарство', inn:'Эссенциале Форте', trade:'Эссенциале Форте Н, Эссливер', cat:'Гепатопротектор (фосфолипиды)', sl:'yellow', se:'yellow', ll:'⚠️ Данные ограничены', le:'⚠️ Осторожно, по назначению', trim:'По назначению врача', gl:'Системное всасывание фосфолипидов минимально. Данных о безопасности при ГВ достаточно мало. Российская практика назначает его часто, но международные гайдлайны его не поддерживают активно.', ge:'Применяется при холестазе беременных в России. Международная доказательная база эффективности ограничена. Безопасность при беременности изучена слабо — только по назначению врача.', ia:'Антикоагулянты (теоретически влияют на ПВ)', src:['ГРЛС','Видаль'], tags:['гепатопротектор','печень','эссенциале','лекарство'] }
-
 // ───────────── ТРАВЫ (30) ─────────────
 { type:'трава', inn:'Ромашка аптечная', trade:'Ромашки цветки, Ромазулан, Ромашка фильтр-пакеты', cat:'Лекарственная трава — Противовоспалительное / Спазмолитик', sl:'yellow', se:'yellow', ll:'⚠️ Изредка, не злоупотреблять', le:'⚠️ Умеренно, избегать крепкий настой', trim:'Осторожно в 1-м триместре', gl:'Разовая чашка некрепкого ромашкового чая — не проблема. Регулярное употребление крепких настоев не рекомендуется: слабый антиэстрогенный эффект теоретически может влиять на выработку молока.', ge:'Один из самых частых вопросов! Слабый чай из ромашки изредка — допустим. Крепкий настой, особенно в 1-м триместре и перед родами, нежелателен: есть данные о слабом утеротоническом эффекте.', ia:'Антикоагулянты (кумарины), седативные', src:['ВОЗ','EMA','e-lactancia'], tags:['трава','ромашка','воспаление'] },
 
@@ -824,7 +886,50 @@ const DB = [
 { type:'продукт', inn:'Шоколад тёмный', trade:'Горький шоколад 70%+, молочный шоколад', cat:'Продукт — Кофеин / Антиоксидант', sl:'yellow', se:'yellow', ll:'⚠️ Умеренно — содержит кофеин', le:'⚠️ Умеренно — кофеин и фенилэтиламин', trim:'Ограничить', gl:'Тёмный шоколад содержит ~25 мг кофеина на 30 г. Учитывайте в дневном лимите кофеина. Небольшой кусочек в день — допустим. У некоторых малышей вызывает беспокойство — наблюдайте.', ge:'Умеренное количество тёмного шоколада допустимо. Флавоноиды какао даже полезны. Но кофеин — в лимит 200 мг/сут. При изжоге — ограничить (расслабляет нижний пищеводный сфинктер).', ia:'Нет значимых взаимодействий', src:['EFSA','Роспотребнадзор'], tags:['шоколад','кофеин','антиоксидант','продукт'] },
 
 { type:'продукт', inn:'Минеральная вода', trade:'Ессентуки, Боржоми, Нарзан, Новотерская', cat:'Напиток — Минеральная вода', sl:'green', se:'yellow', ll:'✅ Столовая и лечебно-столовая — прекрасно', le:'⚠️ Лечебную (>7 г/л минералов) — ограничить', trim:'Столовая — всегда; лечебная — с осторожностью', gl:'Столовая минеральная вода (до 1 г/л) — отличный выбор при ГВ. Помогает поддерживать водный баланс. Ессентуки №4 в разумных количествах — допустимы при изжоге.', ge:'Столовая вода — без ограничений. Лечебная (Боржоми, Ессентуки №17) содержит много натрия и бикарбоната — ограничить при отёках и гипертензии. Газированная — может усиливать изжогу.', ia:'Нет значимых взаимодействий', src:['Роспотребнадзор'], tags:['вода','минеральная','напиток','продукт'] }
+
+,
+// ── ДОПОЛНИТЕЛЬНЫЕ ЛЕКАРСТВА ──
+{ type:'лекарство', inn:'Аспирин', trade:'Аспирин, Аспирин-С, Тромбо АСС', cat:'НПВС / Антиагрегант', sl:'yellow', se:'yellow', ll:'⚠️ В анальгетических дозах нежелательно', le:'⚠️ Низкие дозы допустимы по назначению', trim:'Запрещён в 3-м триместре в высоких дозах', gl:'В анальгетических дозах (500+ мг) не рекомендован при ГВ — риск синдрома Рея у ребёнка. В профилактических дозах 75–100 мг (при риске преэклампсии) — допустим под контролем врача.', ge:'В низких дозах (75–150 мг) назначается при высоком риске преэклампсии — безопасен. В высоких дозах противопоказан в 3-м триместре: риск закрытия артериального протока, кровотечений у новорождённого.', ia:'Варфарин, НПВС, метотрексат', src:['ГРЛС','LactMed','РОАГ'], tags:['обезболивающ','нпвс','аспирин','лекарство'] },
+{ type:'лекарство', inn:'Нимесулид', trade:'Найз, Нимесил, Нимулид', cat:'НПВС (селективный ЦОГ-2)', sl:'yellow', se:'red', ll:'⚠️ Избегать при ГВ', le:'❌ Противопоказан при беременности', trim:'Противопоказан', gl:'Данных о безопасности при лактации недостаточно. Предпочтите ибупрофен или парацетамол.', ge:'ПРОТИВОПОКАЗАН. Не одобрен ни в одном триместре. Риск считается неприемлемым.', ia:'Варфарин, фуросемид, литий', src:['ГРЛС','Видаль','EMA'], tags:['нпвс','обезболивающ','лекарство'] },
+{ type:'лекарство', inn:'Диклофенак', trade:'Вольтарен, Диклак, Диклофенак Ретард', cat:'НПВС', sl:'green', se:'yellow', ll:'✅ Совместим с ГВ', le:'⚠️ Избегать с 20-й недели', trim:'Разрешён до 20 нед.; запрещён в 3-м триместре', gl:'Один из предпочтительных НПВС при лактации благодаря низкому переходу в молоко. При кратком применении — безопасен.', ge:'С 20-й недели могут вызывать олигогидрамнион. Строго запрещён в 3-м триместре.', ia:'Варфарин, литий, гипотензивные', src:['ГРЛС','LactMed','e-lactancia'], tags:['нпвс','обезболивающ','воспаление','лекарство'] },
+{ type:'лекарство', inn:'Нистатин', trade:'Нистатин (таблетки, свечи, мазь)', cat:'Противогрибковый (полиен)', sl:'green', se:'green', ll:'✅ Безопасен при ГВ', le:'✅ Безопасен при беременности', trim:'1–3 триместр', gl:'Практически не всасывается системно — действует только местно. Полностью безопасен при ГВ.', ge:'Не всасывается системно. Разрешён во всех триместрах при кандидозе.', ia:'Без значимых взаимодействий', src:['ГРЛС','Видаль','LactMed'], tags:['противогрибковый','молочница','лекарство'] },
+{ type:'лекарство', inn:'Клотримазол', trade:'Кандид, Клотримазол, Канестен', cat:'Противогрибковый (местное)', sl:'green', se:'green', ll:'✅ Безопасен при ГВ (местно)', le:'✅ Препарат выбора при молочнице', trim:'1–3 триместр', gl:'При наружном и вагинальном применении системная абсорбция минимальна. Безопасен при ГВ.', ge:'Препарат выбора при вагинальном кандидозе в любом триместре.', ia:'Практически отсутствуют при местном применении', src:['ГРЛС','Видаль','e-lactancia'], tags:['противогрибковый','молочница','лекарство'] },
+{ type:'лекарство', inn:'Лактулоза', trade:'Дюфалак, Нормазе, Лактулоза', cat:'Слабительное (осмотическое)', sl:'green', se:'green', ll:'✅ Безопасна при ГВ', le:'✅ Препарат выбора при запоре', trim:'1–3 триместр', gl:'Не всасывается. Абсолютно безопасна при ГВ. Лучший выбор при запоре у кормящей мамы.', ge:'Препарат выбора при запоре во все триместры. Безопасна при длительном применении.', ia:'Антибиотики (принимать через 2 ч)', src:['ГРЛС','Видаль','LactMed'], tags:['слабительное','запор','лекарство'] },
+{ type:'лекарство', inn:'Смекта', trade:'Смекта, Неосмектин, Диосмектит', cat:'Энтеросорбент', sl:'green', se:'green', ll:'✅ Безопасна при ГВ', le:'✅ Безопасна при беременности', trim:'1–3 триместр', gl:'Не всасывается в кровь. Абсолютно безопасна при ГВ при диарее и расстройстве ЖКТ.', ge:'Не обладает системным действием. Безопасна во всех триместрах.', ia:'Все препараты (принимать с интервалом 1–2 ч)', src:['ГРЛС','Видаль'], tags:['пищеварени','диарея','сорбент','лекарство'] },
+{ type:'лекарство', inn:'Феррум Лек / Мальтофер', trade:'Феррум Лек, Мальтофер, Тотема, Ферлатум', cat:'Препарат железа', sl:'green', se:'green', ll:'✅ Безопасен и необходим при анемии', le:'✅ Обязателен при дефиците железа', trim:'1–3 триместр', gl:'Полностью безопасен при ГВ. При анемии — необходим.', ge:'Жизненно необходим при железодефицитной анемии беременных. Мальтофер переносится лучше, чем сульфат железа.', ia:'Антациды, тетрациклины, левотироксин (разделять на 2–4 ч)', src:['ГРЛС','Видаль','ВОЗ'], tags:['железо','анемия','лекарство'] },
+{ type:'лекарство', inn:'Витамин D3', trade:'Аквадетрим, Вигантол, Детримакс', cat:'Витамин D', sl:'green', se:'green', ll:'✅ Необходим при ГВ', le:'✅ Необходим при беременности', trim:'1–3 триместр', gl:'Абсолютно необходим при ГВ — дефицит витамина D у кормящих в России крайне распространён. Рекомендованная доза 1500–2000 МЕ/сут.', ge:'Необходим для усвоения кальция и формирования скелета плода. Стандартная доза 600–2000 МЕ/сут по назначению врача.', ia:'Тиазидные диуретики при высоких дозах', src:['ГРЛС','Видаль','ВОЗ','РОАГ'], tags:['витамин','кальций','кости','лекарство'] },
+{ type:'лекарство', inn:'Йодомарин', trade:'Йодомарин 100/200, Йодид 200', cat:'Микроэлемент — Йод', sl:'green', se:'green', ll:'✅ Необходим при ГВ', le:'✅ Обязателен при беременности', trim:'1–3 триместр', gl:'Жизненно необходим при лактации — потребность в йоде возрастает до 250 мкг/сут. Дефицит йода в России широко распространён.', ge:'Критически необходим в 1-м триместре для формирования щитовидной железы плода. Рекомендованная доза 200–250 мкг/сут.', ia:'Литий (антагонизм), тиреостатики', src:['ГРЛС','Видаль','ВОЗ','РОАГ'], tags:['йод','щитовидная','лекарство'] },
+{ type:'лекарство', inn:'Гепарин (Клексан)', trade:'Клексан, Фраксипарин, Гепарин натрия', cat:'Антикоагулянт', sl:'green', se:'green', ll:'✅ Безопасен при ГВ', le:'✅ Безопасен при беременности', trim:'1–3 триместр (под наблюдением)', gl:'Не проникает в грудное молоко из-за большой молекулярной массы. Безопасен при ГВ.', ge:'Не проникает через плаценту. Антикоагулянт выбора при беременности (варфарин противопоказан).', ia:'Аспирин, НПВС (риск кровотечений)', src:['ГРЛС','Видаль','LactMed','ESC'], tags:['антикоагулянт','тромбоз','лекарство'] },
+{ type:'лекарство', inn:'Метопролол', trade:'Эгилок, Беталок, Метопролол', cat:'Бета-блокатор / Гипотензивный', sl:'yellow', se:'yellow', ll:'⚠️ Совместим — наблюдать ребёнка', le:'⚠️ Применяется — мониторинг плода', trim:'По назначению врача', gl:'Переходит в молоко в небольших количествах. Следить за ЧСС и вскармливанием ребёнка.', ge:'Применяется при гипертензии беременных. Риск брадикардии у новорождённого — мониторинг после родов.', ia:'Верапамил (опасная брадикардия), НПВС', src:['ГРЛС','Видаль','LactMed'], tags:['гипотензивное','давление','лекарство'] },
+// ── ДОПОЛНИТЕЛЬНЫЕ ТРАВЫ ──
+{ type:'трава', inn:'Боярышник', trade:'Боярышника плоды, настойка боярышника', cat:'Трава — Кардиотоник / Седативное', sl:'yellow', se:'yellow', ll:'⚠️ Данных мало, с осторожностью', le:'⚠️ Избегать в 1-м триместре', trim:'Ограниченно', gl:'Традиционно применяется при повышенном давлении. Данных по безопасности при ГВ недостаточно.', ge:'Недостаточно данных. Некоторые компоненты теоретически влияют на тонус матки. В 1-м триместре избегать.', ia:'Сердечные гликозиды (усиление эффекта), гипотензивные', src:['EMA','народная медицина'], tags:['трава','сердце','давление'] },
+{ type:'трава', inn:'Пустырник', trade:'Пустырника трава, настойка пустырника', cat:'Трава — Седативное', sl:'yellow', se:'red', ll:'⚠️ Данные ограничены', le:'❌ Избегать при беременности', trim:'Противопоказан при беременности', gl:'Данных по ГВ крайне мало. Предпочтительнее безопасные нефармакологические методы.', ge:'Содержит алкалоиды, стимулирующие сократимость матки. Противопоказан при беременности.', ia:'Седативные, снотворные', src:['EMA','ГРЛС'], tags:['трава','пустырник','тревога'] },
+{ type:'трава', inn:'Облепиха', trade:'Масло облепихи, ягоды облепихи', cat:'Трава / Продукт — Витаминное', sl:'green', se:'green', ll:'✅ Безопасна при ГВ', le:'✅ Безопасна при беременности', trim:'1–3 триместр', gl:'Богата витаминами А, Е, С. Масло местно при трещинах сосков — смыть перед кормлением.', ge:'Безопасна во всех триместрах. Богатый источник антиоксидантов.', ia:'Антикоагулянты в высоких дозах масла', src:['ГРЛС','народная медицина'], tags:['трава','облепиха','витамин с'] },
+{ type:'трава', inn:'Алтей лекарственный', trade:'Мукалтин, сироп алтея, корень алтея', cat:'Трава — Отхаркивающее', sl:'green', se:'green', ll:'✅ Безопасен при ГВ', le:'✅ Безопасен при беременности', trim:'1–3 триместр', gl:'Мукалтин — традиционное и безопасное средство при кашле. Безопасность при ГВ хорошо подтверждена.', ge:'Мукалтин и сироп алтея — безопасны во всех триместрах. Также помогает при изжоге беременных.', ia:'Без значимых взаимодействий', src:['ГРЛС','народная медицина'], tags:['трава','алтей','кашель','отхаркивающее'] },
+{ type:'трава', inn:'Мать-и-мачеха', trade:'Мать-и-мачехи листья', cat:'Трава — Отхаркивающее', sl:'red', se:'red', ll:'❌ Противопоказана при ГВ', le:'❌ Противопоказана при беременности', trim:'Противопоказана', gl:'ПРОТИВОПОКАЗАНА. Содержит пирролизидиновые алкалоиды — гепатотоксины. ВОЗ и EMA не рекомендуют.', ge:'ПРОТИВОПОКАЗАНА. Токсична для печени плода. Заменить на алтей или мукалтин.', ia:'Гепатотоксичные препараты', src:['EMA','ВОЗ'], tags:['трава','мать-и-мачеха','кашель'] },
+{ type:'трава', inn:'Зверобой (внутрь)', trade:'Негрустин, Деприм, зверобоя трава', cat:'Трава — Антидепрессант', sl:'red', se:'red', ll:'❌ Противопоказан при ГВ', le:'❌ Противопоказан при беременности', trim:'Противопоказан', gl:'ПРОТИВОПОКАЗАН. Попадает в молоко, снижает его количество, у малыша — колики и раздражительность.', ge:'ПРОТИВОПОКАЗАН. Мощный индуктор CYP3A4 — нейтрализует эффект многих лекарств. Фотосенсибилизация.', ia:'Антидепрессанты (серотониновый синдром!), ОК, варфарин — ОПАСНО', src:['EMA','e-lactancia','ГРЛС'], tags:['трава','зверобой','депрессия'] },
+{ type:'трава', inn:'Тысячелистник', trade:'Тысячелистника трава', cat:'Трава — Гемостатик', sl:'red', se:'red', ll:'❌ Не применять при ГВ', le:'❌ Противопоказан при беременности', trim:'Противопоказан', gl:'Не рекомендован при ГВ. Безопасность при лактации не изучена.', ge:'ПРОТИВОПОКАЗАН. Содержит туйон — вещество с утеротоническим действием.', ia:'Антикоагулянты (усиление эффекта)', src:['EMA','Видаль'], tags:['трава','тысячелистник'] },
+// ── ДОПОЛНИТЕЛЬНЫЕ ЧАИ ──
+{ type:'чай', inn:'Облепиховый чай / морс', trade:'Облепиховый напиток', cat:'Чай — Витаминный', sl:'green', se:'green', ll:'✅ Прекрасен при ГВ', le:'✅ Рекомендован', trim:'1–3 триместр', gl:'Богатейший источник витаминов C, E, А. Безопасен и очень полезен при ГВ.', ge:'Безопасен во всех триместрах. Один из лучших напитков при беременности.', ia:'Без значимых взаимодействий', src:['народная медицина','ВОЗ'], tags:['чай','облепиха','витамин с'] },
+{ type:'чай', inn:'Клюквенный морс', trade:'Морс из клюквы', cat:'Напиток — Витаминное / МВП', sl:'green', se:'green', ll:'✅ Безопасен и полезен', le:'✅ Рекомендован при цистите', trim:'1–3 триместр', gl:'Снижает риск инфекций мочевых путей. При ГВ — один из лучших природных напитков.', ge:'Снижает риск ИМП, которые особенно часты при беременности. Не заменяет антибиотики.', ia:'Варфарин (умеренно при больших объёмах)', src:['Cochrane','ВОЗ','ГРЛС'], tags:['чай','клюква','цистит','витамин с'] },
+{ type:'чай', inn:'Кофе без кофеина (декаф)', trade:'Jacobs Decaf, Tchibo Decaf', cat:'Напиток — Без кофеина', sl:'green', se:'green', ll:'✅ Безопасен при ГВ', le:'✅ Хорошая альтернатива кофе', trim:'1–3 триместр', gl:'Декаф содержит лишь 3–12 мг кофеина на чашку. Практически безопасен при ГВ.', ge:'Безопасная альтернатива кофе в любом триместре.', ia:'Без значимых взаимодействий', src:['EFSA','ВОЗ'], tags:['чай','кофе','декаф','кофеин'] },
+{ type:'чай', inn:'Чай ройбуш', trade:'Rooibos, Red Bush Tea', cat:'Чай — Без кофеина / Антиоксидант', sl:'green', se:'green', ll:'✅ Отличный выбор при ГВ', le:'✅ Один из лучших при беременности', trim:'1–3 триместр', gl:'Идеальный напиток при ГВ: без кофеина, богат антиоксидантами.', ge:'Один из наиболее безопасных напитков при беременности. Без кофеина, с хорошим антиоксидантным профилем.', ia:'Без значимых взаимодействий', src:['Food Standards Agency','e-lactancia'], tags:['чай','ройбуш','без кофеина','антиоксидант'] },
+{ type:'чай', inn:'Чай с калиной', trade:'Калина, калиновый морс', cat:'Чай — Витаминный / Жаропонижающий', sl:'green', se:'yellow', ll:'✅ Безопасен при ГВ', le:'⚠️ С осторожностью в 1-м триместре', trim:'Осторожно в начале беременности', gl:'Богат витамином C. Традиционный напиток при простуде. При ГВ в умеренных количествах — безопасен.', ge:'В 1-м триместре умеренные количества допустимы. В большом количестве — лучше проконсультироваться.', ia:'Антикоагулянты (высокое содержание витамина C)', src:['народная медицина','ГРЛС'], tags:['чай','калина','витамин с'] },
+{ type:'чай', inn:'Морс из чёрной смородины', trade:'Чёрная смородина, сок смородины', cat:'Напиток — Витаминный', sl:'green', se:'green', ll:'✅ Отлично при ГВ', le:'✅ Рекомендован', trim:'1–3 триместр', gl:'Рекордсмен по витамину C. Безопасен и очень полезен при ГВ.', ge:'Безопасен во всех триместрах. Богат витамином C, фолатами и антиоксидантами.', ia:'Без значимых взаимодействий', src:['народная медицина','ВОЗ'], tags:['чай','смородина','витамин с','ягода'] },
+{ type:'чай', inn:'Цикорий', trade:'Цикорий растворимый, Chicory', cat:'Напиток — Заменитель кофе', sl:'yellow', se:'yellow', ll:'⚠️ Умеренно', le:'⚠️ Умеренно', trim:'Умеренно', gl:'Популярный заменитель кофе без кофеина. При ГВ в умеренных количествах — приемлем.', ge:'Умеренные количества допустимы. При желчнокаменной болезни — не применять.', ia:'Без значимых взаимодействий в умеренных дозах', src:['народная медицина'], tags:['чай','цикорий','кофе','заменитель'] },
+// ── ДОПОЛНИТЕЛЬНЫЕ ПРОДУКТЫ ──
+{ type:'продукт', inn:'Красная икра', trade:'Икра лососёвая, горбуши, нерки', cat:'Продукт — Омега-3', sl:'yellow', se:'yellow', ll:'⚠️ Умеренно — много соли', le:'⚠️ Умеренно — соль + листерия', trim:'Осторожно', gl:'Богата ДГК и омега-3. При ГВ 1–2 бутерброда — допустимо. Высокое содержание соли — ограничить при отёках.', ge:'Высокое содержание соли → риск отёков. Домашняя икра без пастеризации — риск листерии!', ia:'Антикоагулянты при высоких дозах омега-3', src:['Роспотребнадзор','EFSA'], tags:['рыба','икра','омега3','продукт'] },
+{ type:'продукт', inn:'Йогурт и кефир', trade:'Активиа, Данон, Простоквашино, Имунеле', cat:'Продукт — Кисломолочное / Пробиотики', sl:'green', se:'green', ll:'✅ Ежедневно рекомендуется', le:'✅ Ежедневно рекомендуется', trim:'1–3 триместр', gl:'Кисломолочные продукты — основа рациона кормящей мамы. Снижают риск кандидоза при приёме антибиотиков.', ge:'Ежедневное потребление — норма при беременности. Кальций и белок — основа для формирования скелета плода.', ia:'Препараты железа, левотироксин (разделять на 2–4 ч)', src:['Роспотребнадзор','ВОЗ'], tags:['молочн','йогурт','кефир','пробиотик','продукт'] },
+{ type:'продукт', inn:'Авокадо', trade:'Авокадо, Guacamole', cat:'Продукт — Фолиевая кислота', sl:'green', se:'green', ll:'✅ Очень полезен при ГВ', le:'✅ Рекомендован при беременности', trim:'1–3 триместр', gl:'Один из лучших продуктов при ГВ. Богат полезными жирами, фолатами, витамином K.', ge:'Богат фолиевой кислотой — критической в 1-м триместре. Необходим для развития мозга плода.', ia:'Варфарин (витамин K — теоретически)', src:['ВОЗ','FAO'], tags:['авокадо','фолат','жиры','продукт'] },
+{ type:'продукт', inn:'Гречка', trade:'Крупа гречневая ядрица', cat:'Продукт — Железо / Фолаты', sl:'green', se:'green', ll:'✅ Один из лучших продуктов при ГВ', le:'✅ Рекомендована при беременности', trim:'1–3 триместр', gl:'Лучший источник растительного железа и фолиевой кислоты в российской диете.', ge:'Гречка — «суперпродукт» при беременности: железо, фолаты, магний, рутин (укрепляет сосуды).', ia:'Без значимых взаимодействий', src:['Роспотребнадзор','ВОЗ'], tags:['зерно','гречка','железо','фолат','продукт'] },
+{ type:'продукт', inn:'Орехи грецкие', trade:'Грецкий орех', cat:'Продукт — Омега-3 / Йод', sl:'green', se:'green', ll:'✅ Горсть в день — отлично', le:'✅ Рекомендованы', trim:'1–3 триместр', gl:'Лучший растительный источник омега-3 и йода. При ГВ — 5–7 штук в день.', ge:'Богаты предшественниками омега-3, йодом и фолатами. Одни из самых полезных орехов при беременности.', ia:'Антикоагулянты (витамин E в высоких дозах)', src:['Роспотребнадзор','ВОЗ'], tags:['орехи','грецкий','омега3','продукт'] },
+{ type:'продукт', inn:'Ягоды (клубника, малина, черника)', trade:'Свежие и замороженные ягоды', cat:'Продукт — Антиоксиданты', sl:'green', se:'green', ll:'✅ Ежедневно — отлично', le:'✅ Ежедневно — рекомендованы', trim:'1–3 триместр', gl:'Концентраторы антиоксидантов, витамина C и фолатов. Ежедневная порция ягод — очень полезна.', ge:'Богатый источник витамина C, фолатов и антоцианов. Замороженные без добавок — столь же полезны.', ia:'Без значимых взаимодействий', src:['Роспотребнадзор','ВОЗ'], tags:['ягоды','антиоксидант','витамин с','продукт'] },
+{ type:'продукт', inn:'Энергетические напитки', trade:'Red Bull, Burn, Monster, Adrenaline Rush', cat:'Напиток — Кофеин / СТРОГО ЗАПРЕЩЁН', sl:'red', se:'red', ll:'❌ Строго противопоказаны при ГВ', le:'❌ Строго противопоказаны при беременности', trim:'Противопоказаны', gl:'СТРОГО ПРОТИВОПОКАЗАНЫ. Содержат высокие дозы кофеина (80–160 мг и более), таурин и другие стимуляторы.', ge:'СТРОГО ПРОТИВОПОКАЗАНЫ. Высокий риск нарушений развития плода. Нет данных безопасности.', ia:'Все стимуляторы ЦНС', src:['ВОЗ','Роспотребнадзор','EFSA'], tags:['энергетик','кофеин','напиток','продукт'] },
+{ type:'продукт', inn:'Растительные масла (оливковое, льняное)', trade:'Оливковое масло, льняное масло', cat:'Продукт — Омега-3 / Жиры', sl:'green', se:'green', ll:'✅ 1–2 ст.л. ежедневно', le:'✅ Рекомендованы ежедневно', trim:'1–3 триместр', gl:'Оливковое масло — источник олеиновой кислоты. Льняное — богатейший растительный источник омега-3.', ge:'Необходимы для усвоения витаминов A, D, E, K. Льняное — ценный источник омега-3 при беременности.', ia:'Антикоагулянты (льняное масло в больших дозах)', src:['ВОЗ','Роспотребнадзор'], tags:['масло','омега3','жиры','продукт'] },
+{ type:'продукт', inn:'Бобовые (фасоль, чечевица, горох)', trade:'Фасоль, чечевица красная, нут', cat:'Продукт — Растительный белок / Фолаты', sl:'green', se:'green', ll:'✅ Безопасны (внимание на газообразование)', le:'✅ Рекомендованы при беременности', trim:'1–3 триместр', gl:'Ценный источник растительного железа, фолатов и белка. Хорошо проваривать.', ge:'Прекрасный источник фолатов — ключевых в 1-м триместре. Богаты железом и белком.', ia:'Препараты железа (фитаты снижают всасывание)', src:['Роспотребнадзор','ВОЗ'], tags:['бобовые','железо','фолат','продукт'] },
+{ type:'продукт', inn:'Суши приготовленные', trade:'Запечённые роллы, роллы с варёными морепродуктами', cat:'Продукт — Приготовленные японские блюда', sl:'green', se:'yellow', ll:'✅ Приготовленные роллы — безопасны', le:'⚠️ Только без сырой рыбы', trim:'Приготовленные — да; с сырой рыбой — нет', gl:'Запечённые роллы с варёными компонентами при ГВ — безопасны. Сырая рыба — нежелательна.', ge:'Только приготовленные роллы без сырой рыбы. Риск листерии и анисакиоза от сырого.', ia:'Без значимых взаимодействий', src:['Роспотребнадзор','EFSA'], tags:['рыба','суши','приготовленное','продукт'] }
 ];
+
 
 // ══════════════════════════════════════════════════════════
 // СОСТОЯНИЕ
@@ -966,14 +1071,10 @@ function renderResults(results, query) {
     main.insertBefore(card, document.getElementById('historyPanel'));
   });
 
-  // Показываем только одну плашку-дисклеймер
-  const existingDisc = main.querySelector('.disclaimer');
-  if (!existingDisc) {
-    const disc = document.createElement('div');
-    disc.className = 'disclaimer';
-    disc.innerHTML = `<span style="font-size:15px;flex-shrink:0">ℹ️</span><span>Информация носит справочный характер и не заменяет консультацию врача, акушера-гинеколога или фармацевта. При любых сомнениях обратитесь к специалисту.</span>`;
-    main.insertBefore(disc, document.getElementById('historyPanel'));
-  }
+  const disc = document.createElement('div');
+  disc.className = 'disclaimer';
+  disc.innerHTML = `<span style="font-size:15px;flex-shrink:0">ℹ️</span><span>Информация носит справочный характер и не заменяет консультацию врача, акушера-гинеколога или фармацевта. При любых сомнениях обратитесь к специалисту.</span>`;
+  main.insertBefore(disc, document.getElementById('historyPanel'));
 }
 
 // ── ИСТОРИЯ ──
@@ -1046,5 +1147,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (savedItems.length) { document.getElementById('savedPanel').style.display = 'block'; renderSavedList(); }
 });
 </script>
+
 </body>
 </html>
