@@ -356,11 +356,11 @@ padding: 7px 0;
 .search-box input::placeholder { color: #BBC4AA; }
 
 .search-btn {
-background: var(–birch-dark);
-color: white;
+background: #2E5A26;
+color: #ffffff;
 border: none;
 border-radius: 40px;
-padding: 10px 22px;
+padding: 11px 24px;
 font-family: ‘Manrope’, sans-serif;
 font-size: 13px;
 font-weight: 700;
@@ -368,8 +368,14 @@ cursor: pointer;
 transition: all 0.2s;
 white-space: nowrap;
 flex-shrink: 0;
+box-shadow: 0 2px 8px rgba(46,90,38,0.35);
+letter-spacing: 0.3px;
 }
-.search-btn:hover { background: var(–birch); transform: translateY(-1px); }
+.search-btn:hover {
+background: #1E3D1A;
+transform: translateY(-1px);
+box-shadow: 0 4px 12px rgba(46,90,38,0.45);
+}
 
 /* ── БЫСТРЫЕ ЧИПЫ ── */
 .quick-chips {
@@ -476,54 +482,98 @@ white-space: nowrap;
 .badge.yellow { background: var(–amber-bg); color: var(–amber-txt); }
 .badge.red { background: var(–red-bg); color: var(–red-txt); }
 
-.result-section { padding: 14px 20px; border-bottom: 1px solid #F5F2EC; }
+.result-section {
+padding: 14px 16px;
+border-bottom: 1px solid #F0EDE6;
+}
 .result-section:last-child { border-bottom: none; }
 
+/* FIX 2: каждая секция — в отдельном окошке */
+.section-box {
+background: #F8FBF6;
+border: 1px solid #DFF0D8;
+border-radius: 12px;
+padding: 12px 14px;
+margin-top: 4px;
+}
+
+.section-box-amber {
+background: #FFFBF0;
+border: 1px solid #F0E0B0;
+border-radius: 12px;
+padding: 12px 14px;
+margin-top: 4px;
+}
+
+.section-box-neutral {
+background: #F5F8FF;
+border: 1px solid #D8E4F0;
+border-radius: 12px;
+padding: 12px 14px;
+margin-top: 4px;
+}
+
+.section-box-sources {
+background: var(–birch-pale);
+border: 1px solid var(–birch-light);
+border-radius: 12px;
+padding: 12px 14px;
+margin-top: 4px;
+}
+
 .section-label {
-font-size: 10px;
+font-size: 11px;
 font-weight: 700;
-letter-spacing: 1px;
+letter-spacing: 0.8px;
 text-transform: uppercase;
 color: var(–birch-mid);
-margin-bottom: 7px;
+margin-bottom: 0px;
 display: flex;
 align-items: center;
 gap: 5px;
 }
 
-.section-text { font-size: 14px; line-height: 1.65; color: #2A3820; }
+.section-text { font-size: 14px; line-height: 1.65; color: #2A3820; margin-top: 6px; }
 
 .interactions-list {
-font-size: 12.5px;
+font-size: 13px;
 color: var(–text-soft);
-background: var(–birch-pale);
-border-radius: 8px;
-padding: 10px 14px;
 line-height: 1.6;
+margin-top: 6px;
 }
 
-.source-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.source-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
 .source-tags { display: flex; flex-wrap: wrap; gap: 5px; }
 
 .source-tag {
-font-size: 10px;
+font-size: 11px;
 background: white;
 border: 1px solid var(–birch-light);
 color: var(–birch-mid);
-padding: 2px 8px;
+padding: 3px 10px;
 border-radius: 20px;
 font-weight: 600;
 }
 
-.expert-check { font-size: 11px; color: var(–green-txt); font-weight: 700; flex-shrink: 0; }
+.expert-check {
+font-size: 11px;
+color: var(–green-txt);
+font-weight: 700;
+flex-shrink: 0;
+background: #E8F5E0;
+padding: 3px 10px;
+border-radius: 20px;
+border: 1px solid #C0E0A8;
+}
 
 .save-btn {
-margin-top: 10px; width: 100%; background: none;
-border: 1.5px dashed var(–birch-light); border-radius: 8px; padding: 8px;
-font-family: ‘Manrope’, sans-serif; font-size: 12px; font-weight: 600;
-color: var(–birch); cursor: pointer; transition: all 0.2s;
+margin-top: 10px; width: 100%; background: white;
+border: 2px solid var(–birch-light); border-radius: 10px; padding: 10px;
+font-family: ‘Manrope’, sans-serif; font-size: 13px; font-weight: 600;
+color: var(–birch-dark); cursor: pointer; transition: all 0.2s;
+display: flex; align-items: center; justify-content: center; gap: 6px;
 }
-.save-btn:hover { background: var(–birch-pale); border-color: var(–birch); }
+.save-btn:hover { background: var(–birch-pale); border-color: var(–birch); color: var(–birch-dark); }
 
 .disclaimer {
 background: var(–warm);
@@ -1147,8 +1197,16 @@ function renderResults(results, query) {
       ${showBere ? `<div class="badge ${item.se}"><span>🤰</span> ${item.le}</div>` : ''}
     `;
 
-    const gvSec   = showGV   ? `<div class="result-section"><div class="section-label">🤱 При грудном вскармливании</div><div class="section-text">${item.gl}</div></div>` : '';
-    const bereSec = showBere ? `<div class="result-section"><div class="section-label">🤰 При беременности</div><div class="section-text">${item.ge}</div></div>` : '';
+    const gvSec   = showGV   ? `<div class="result-section">
+      <div class="section-box">
+        <div class="section-label">🤱 При грудном вскармливании</div>
+        <div class="section-text">${item.gl}</div>
+      </div></div>` : '';
+    const bereSec = showBere ? `<div class="result-section">
+      <div class="section-box-amber">
+        <div class="section-label">🤰 При беременности</div>
+        <div class="section-text">${item.ge}</div>
+      </div></div>` : '';
 
     const srcTags = item.src.map(s => `<span class="source-tag">${s}</span>`).join('');
     const alreadySaved = savedItems.find(d => d.inn === item.inn);
@@ -1168,14 +1226,18 @@ function renderResults(results, query) {
         ${gvSec}
         ${bereSec}
         <div class="result-section">
-          <div class="section-label">⚠️ Взаимодействия и предостережения</div>
-          <div class="interactions-list">${item.ia}</div>
+          <div class="section-box-neutral">
+            <div class="section-label">⚠️ Взаимодействия и предостережения</div>
+            <div class="interactions-list">${item.ia}</div>
+          </div>
         </div>
         <div class="result-section">
-          <div class="section-label">📚 Источники</div>
-          <div class="source-row">
-            <div class="source-tags">${srcTags}</div>
-            <div class="expert-check">✅ Проверено экспертом</div>
+          <div class="section-box-sources">
+            <div class="section-label">📚 Источники</div>
+            <div class="source-row">
+              <div class="source-tags">${srcTags}</div>
+              <div class="expert-check">✅ Проверено экспертом</div>
+            </div>
           </div>
           ${!alreadySaved ? `<button class="save-btn" onclick="saveItem(DB.find(d=>d.inn==='${item.inn.replace(/'/g,"\\'")}'))">⭐ Сохранить</button>` : ''}
         </div>
