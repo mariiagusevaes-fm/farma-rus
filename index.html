@@ -110,7 +110,8 @@ white-space: nowrap;
 
 /* ── ШАПКА ── */
 header {
-background: var(–birch-dark);
+background: linear-gradient(135deg, #5A8C4E 0%, #7BAE6E 100%);
+border-bottom: none;
 padding: 0 20px;
 height: 60px;
 display: flex;
@@ -120,6 +121,7 @@ position: sticky;
 top: 0;
 z-index: 100;
 gap: 12px;
+box-shadow: 0 2px 12px rgba(60,100,40,0.2);
 }
 
 .logo {
@@ -271,10 +273,16 @@ white-space: nowrap;
 letter-spacing: 0.2px;
 }
 
-.type-btn.active, .type-btn:hover {
+.type-btn.active {
 background: white;
-color: var(–birch-dark);
+color: var(–birch-dark) !important;
 border-color: white;
+font-weight: 700;
+}
+.type-btn:hover:not(.active) {
+background: rgba(255,255,255,0.25);
+color: white;
+border-color: rgba(255,255,255,0.5);
 }
 
 /* ── СИТУАЦИЯ ── */
@@ -301,9 +309,10 @@ white-space: nowrap;
 }
 
 .tab.active {
-background: #fff;
-color: var(–birch-dark);
-border-color: #fff;
+background: white;
+color: var(–birch-dark) !important;
+border-color: white;
+font-weight: 700;
 }
 
 .tab:hover:not(.active) {
@@ -552,18 +561,44 @@ letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;
 .cat-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-gap: 8px;
+gap: 10px;
 }
 
 .cat-card {
-background: white; border: 1px solid var(–warm-border);
-border-radius: var(–r-sm); padding: 12px 14px; cursor: pointer;
-transition: all 0.2s; display: flex; align-items: center; gap: 8px;
-min-width: 0; overflow: hidden;
+background: white;
+border: 1.5px solid var(–warm-border);
+border-radius: 14px;
+padding: 14px 12px;
+cursor: pointer;
+transition: all 0.2s;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 8px;
+text-align: center;
+min-width: 0;
+box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
-.cat-card:hover { border-color: var(–birch); box-shadow: var(–shadow); transform: translateY(-1px); }
-.cat-card-icon { font-size: 18px; flex-shrink: 0; }
-.cat-card-name { font-size: 12px; font-weight: 600; color: var(–text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cat-card:hover {
+border-color: var(–birch);
+box-shadow: 0 4px 16px rgba(91,160,78,0.18);
+transform: translateY(-2px);
+}
+.cat-card-icon {
+font-size: 26px;
+width: 44px; height: 44px;
+display: flex; align-items: center; justify-content: center;
+border-radius: 12px;
+background: var(–birch-pale);
+flex-shrink: 0;
+}
+.cat-card-name {
+font-size: 12px;
+font-weight: 700;
+color: var(–text);
+line-height: 1.3;
+word-break: break-word;
+}
 
 /* ── ПАНЕЛИ ИСТОРИЯ/СОХРАНЕНО ── */
 .panel-section {
@@ -648,7 +683,7 @@ main { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
       <span class="korm-icon">🤱</span>
       <div class="korm-texts">
         <div class="korm-name">Кормилица</div>
-        <div class="korm-sub">kormybaby.ru</div>
+        <div class="korm-sub">помощь маме</div>
       </div>
     </div>
   </a>
@@ -661,11 +696,11 @@ main { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
 
   <div class="search-wrap">
     <div class="type-filter">
-      <button class="type-btn active" onclick="setType('all',this)">🔍 Всё</button>
-      <button class="type-btn" onclick="setType('лекарство',this)">💊 Лекарства</button>
-      <button class="type-btn" onclick="setType('трава',this)">🌿 Травы</button>
-      <button class="type-btn" onclick="setType('чай',this)">🍵 Чаи</button>
-      <button class="type-btn" onclick="setType('продукт',this)">🥗 Продукты</button>
+      <button class="type-btn active" onclick="setType('all',this)" data-type="all">🔍 Всё</button>
+      <button class="type-btn" onclick="setType('лекарство',this)" data-type="лекарство">💊 Лекарства</button>
+      <button class="type-btn" onclick="setType('трава',this)" data-type="трава">🌿 Травы</button>
+      <button class="type-btn" onclick="setType('чай',this)" data-type="чай">🍵 Чаи</button>
+      <button class="type-btn" onclick="setType('продукт',this)" data-type="продукт">🥗 Продукты</button>
     </div>
 
 ```
@@ -708,16 +743,18 @@ main { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
   <div class="categories" id="catSection">
     <div class="categories-title">Категории</div>
     <div class="cat-grid">
-      <div class="cat-card" onclick="filterCat('обезболивающ')"><span class="cat-card-icon">💊</span><span class="cat-card-name">Обезболивающие</span></div>
-      <div class="cat-card" onclick="filterCat('антибиотик')"><span class="cat-card-icon">🦠</span><span class="cat-card-name">Антибиотики</span></div>
-      <div class="cat-card" onclick="filterCat('спазмолитик')"><span class="cat-card-icon">🫁</span><span class="cat-card-name">Спазмолитики</span></div>
-      <div class="cat-card" onclick="filterCat('пищеварени')"><span class="cat-card-icon">🫃</span><span class="cat-card-name">Пищеварение</span></div>
-      <div class="cat-card" onclick="filterCat('антигистамин')"><span class="cat-card-icon">🌸</span><span class="cat-card-name">Антигистаминные</span></div>
-      <div class="cat-card" onclick="filterCat('трава')"><span class="cat-card-icon">🌿</span><span class="cat-card-name">Травы</span></div>
-      <div class="cat-card" onclick="filterCat('чай')"><span class="cat-card-icon">🍵</span><span class="cat-card-name">Чаи</span></div>
-      <div class="cat-card" onclick="filterCat('рыба')"><span class="cat-card-icon">🐟</span><span class="cat-card-name">Рыба</span></div>
-      <div class="cat-card" onclick="filterCat('молочн')"><span class="cat-card-icon">🥛</span><span class="cat-card-name">Молочное</span></div>
-      <div class="cat-card" onclick="filterCat('кофе')"><span class="cat-card-icon">☕</span><span class="cat-card-name">Кофе и чай</span></div>
+      <div class="cat-card" onclick="filterCat('обезболивающ')" style="--ic:#FFF0E8;--bc:#E8793A"><span class="cat-card-icon" style="background:#FFF0E8">💊</span><span class="cat-card-name">Обезболивающие</span></div>
+      <div class="cat-card" onclick="filterCat('антибиотик')" style="--ic:#E8F5E9"><span class="cat-card-icon" style="background:#E8F5E9">🦠</span><span class="cat-card-name">Антибиотики</span></div>
+      <div class="cat-card" onclick="filterCat('спазмолитик')" style="--ic:#F3E8FF"><span class="cat-card-icon" style="background:#F3E8FF">🫁</span><span class="cat-card-name">Спазмолитики</span></div>
+      <div class="cat-card" onclick="filterCat('пищеварени')" style="--ic:#FFF8E1"><span class="cat-card-icon" style="background:#FFF8E1">🫃</span><span class="cat-card-name">Пищеварение</span></div>
+      <div class="cat-card" onclick="filterCat('антигистамин')" style="--ic:#FCE4EC"><span class="cat-card-icon" style="background:#FCE4EC">🌸</span><span class="cat-card-name">Антигистаминные</span></div>
+      <div class="cat-card" onclick="filterCat('витамин')" style="--ic:#FFFDE7"><span class="cat-card-icon" style="background:#FFFDE7">💊</span><span class="cat-card-name">Витамины и минералы</span></div>
+      <div class="cat-card" onclick="setTypeFromCat('трава')" style="--ic:#F1F8E9"><span class="cat-card-icon" style="background:#F1F8E9">🌿</span><span class="cat-card-name">Все травы</span></div>
+      <div class="cat-card" onclick="setTypeFromCat('чай')" style="--ic:#FFF8E1"><span class="cat-card-icon" style="background:#FFF8E1">🍵</span><span class="cat-card-name">Все чаи</span></div>
+      <div class="cat-card" onclick="filterCat('рыба')" style="--ic:#E3F2FD"><span class="cat-card-icon" style="background:#E3F2FD">🐟</span><span class="cat-card-name">Рыба</span></div>
+      <div class="cat-card" onclick="filterCat('молочн')" style="--ic:#E8F5E9"><span class="cat-card-icon" style="background:#E8F5E9">🥛</span><span class="cat-card-name">Молочное</span></div>
+      <div class="cat-card" onclick="filterCat('кофе')" style="--ic:#EFEBE9"><span class="cat-card-icon" style="background:#EFEBE9">☕</span><span class="cat-card-name">Кофе и кофеин</span></div>
+      <div class="cat-card" onclick="filterCat('алкоголь')" style="--ic:#FFEBEE"><span class="cat-card-icon" style="background:#FFEBEE">🍷</span><span class="cat-card-name">Алкоголь</span></div>
     </div>
   </div>
 
@@ -958,7 +995,16 @@ function setType(type, el) {
   document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   const q = document.getElementById('searchInput').value.trim();
-  if (q) doSearch(); else showEmpty();
+  if (q) {
+    doSearch();
+  } else if (type !== 'all') {
+    // Fix 3: show ALL items of this type
+    const results = DB.filter(d => d.type === type);
+    renderResults(results, type);
+    document.getElementById('searchInput').value = '';
+  } else {
+    showEmpty();
+  }
 }
 
 function setSituation(s, el) {
@@ -981,6 +1027,20 @@ function filterCat(tag) {
   const results = DB.filter(d => d.tags.some(t => t.includes(tag)));
   renderResults(results, tag);
   document.getElementById('searchInput').value = '';
+}
+
+// Fix 3: for category buttons "All herbs" / "All teas" — show by type
+function setTypeFromCat(type) {
+  const results = DB.filter(d => d.type === type);
+  renderResults(results, type);
+  document.getElementById('searchInput').value = '';
+  // Also update type-btn visual state
+  document.querySelectorAll('.type-btn').forEach(b => {
+    const btnType = b.getAttribute('data-type');
+    if (btnType === type) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  currentType = type;
 }
 
 function doSearch() {
