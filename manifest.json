@@ -2,7 +2,7 @@
   "name": "МожноЛи",
   "short_name": "МожноЛи",
   "description": "Безопасность лекарств, трав и продуктов при беременности и ГВ",
-  "start_url": "./mojnoli.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#FDFCF8",
   "theme_color": "#7BAE6E",
