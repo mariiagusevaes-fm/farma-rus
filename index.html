@@ -135,12 +135,12 @@ cursor: pointer;
 
 .logo-icon {
 width: 36px; height: 36px;
-background: rgba(255,255,255,0.15);
+background: rgba(255,255,255,0.28);
 border-radius: 10px;
 display: grid;
 place-items: center;
-font-size: 19px;
-border: 1px solid rgba(255,255,255,0.2);
+font-size: 20px;
+border: 1.5px solid rgba(255,255,255,0.5);
 }
 
 .logo-text {
@@ -184,7 +184,7 @@ content: ‘🌿’;
 position: absolute;
 right: -20px; top: -30px;
 font-size: 220px;
-opacity: 0.06;
+opacity: 0.22;
 transform: rotate(-20deg);
 pointer-events: none;
 line-height: 1;
@@ -196,7 +196,7 @@ content: ‘🌾’;
 position: absolute;
 left: -30px; bottom: -20px;
 font-size: 160px;
-opacity: 0.05;
+opacity: 0.18;
 transform: rotate(15deg);
 pointer-events: none;
 line-height: 1;
@@ -210,9 +210,9 @@ font-size: 11px;
 font-weight: 700;
 letter-spacing: 1.5px;
 text-transform: uppercase;
-color: var(–birch-light);
-background: rgba(255,255,255,0.1);
-border: 1px solid rgba(255,255,255,0.2);
+color: #ffffff;
+background: rgba(255,255,255,0.2);
+border: 1px solid rgba(255,255,255,0.45);
 padding: 5px 14px;
 border-radius: 20px;
 margin-bottom: 18px;
@@ -272,10 +272,8 @@ color: rgba(255,255,255,0.8);
 cursor: pointer;
 font-family: ‘Manrope’, sans-serif;
 transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
-overflow: visible;
 white-space: nowrap;
-min-width: fit-content;
-white-space: nowrap;
+min-width: 0;
 letter-spacing: 0.2px;
 }
 
@@ -313,10 +311,8 @@ background: rgba(255,255,255,0.1);
 color: rgba(255,255,255,0.85);
 font-family: ‘Manrope’, sans-serif;
 transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
-overflow: visible;
 white-space: nowrap;
-min-width: fit-content;
-white-space: nowrap;
+min-width: 0;
 }
 
 .tab.active {
@@ -406,8 +402,6 @@ cursor: pointer;
 transition: background 0.15s, border-color 0.15s;
 font-family: ‘Manrope’, sans-serif;
 white-space: nowrap;
-overflow: visible;
-text-overflow: clip;
 }
 .chip:hover { background: rgba(255,255,255,0.3); }
 
@@ -424,10 +418,24 @@ background: white;
 border-radius: var(–r);
 box-shadow: var(–shadow);
 border: 1px solid var(–warm-border);
-overflow: visible;
-margin-bottom: 14px;
+overflow: hidden;
+margin-bottom: 20px;
 animation: slideUp 0.3s ease;
 }
+/* section-box живут внутри result-section — overflow:hidden не мешает им */
+.result-section .section-box,
+.result-section .section-box-amber,
+.result-section .section-box-neutral,
+.result-section .section-box-sources {
+display: block !important;
+border-radius: 12px !important;
+padding: 12px 14px !important;
+margin-top: 0 !important;
+}
+.result-section .section-box { background: #F0F9EC !important; border: 1.5px solid #B8DFA8 !important; }
+.result-section .section-box-amber { background: #FFFAEE !important; border: 1.5px solid #E8CC80 !important; }
+.result-section .section-box-neutral { background: #F0F4FF !important; border: 1.5px solid #B8CAF0 !important; }
+.result-section .section-box-sources { background: #F0F8EC !important; border: 1.5px solid #B0D898 !important; }
 
 @keyframes slideUp {
 from { opacity: 0; transform: translateY(10px); }
@@ -599,7 +607,7 @@ align-items: flex-start;
 
 /* ── ПУСТОЙ ЭКРАН ── */
 .empty-state { text-align: center; padding: 36px 16px; }
-.empty-icon { font-size: 52px; margin-bottom: 12px; opacity: 0.4; }
+.empty-icon { font-size: 52px; margin-bottom: 12px; opacity: 0.75; }
 .empty-state h3 {
 font-family: ‘Cormorant Garamond’, serif;
 font-size: 22px;
