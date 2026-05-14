@@ -299,22 +299,6 @@ white-space: nowrap;
 .symptom-btn:hover { background: var(–birch-pale); border-color: var(–birch); color: var(–birch-dark); }
 
 /* СВЕРНУТЬ КАТЕГОРИИ */
-.cat-toggle-row {
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 10px 14px;
-background: var(–birch-pale);
-border: 1px solid var(–birch-light);
-border-radius: 10px;
-cursor: pointer;
-margin-top: 16px;
-font-size: 13px;
-font-weight: 600;
-color: var(–birch-dark);
-transition: background 0.2s;
-}
-.cat-toggle-row:hover { background: #E0F0D8; }
 
 /* БЛОК “НЕ НАЙДЕНО” — улучшенный */
 .not-found {
@@ -1161,39 +1145,23 @@ overflow: visible;
 <div class="categories-title" style="margin-top:20px;margin-bottom:10px">🩺 Поиск по симптому</div>
 <div class="symptoms-grid">
   <button class="symptom-btn" onclick="quickSearch('температура')">🌡️ Температура</button>
-  <button class="symptom-btn" onclick="quickSearch('тошнота')">🤢 Тошнота</button>
+  <button class="symptom-btn" onclick="quickSearch('тошнота')">🤢 Тошнота / рвота</button>
   <button class="symptom-btn" onclick="quickSearch('токсикоз')">😰 Токсикоз</button>
   <button class="symptom-btn" onclick="quickSearch('боль в горле')">🤒 Боль в горле</button>
   <button class="symptom-btn" onclick="quickSearch('насморк')">🤧 Насморк</button>
   <button class="symptom-btn" onclick="quickSearch('молочница')">🔬 Молочница</button>
   <button class="symptom-btn" onclick="quickSearch('запор')">😣 Запор</button>
-  <button class="symptom-btn" onclick="quickSearch('можно ли кофе')">☕ Можно ли кофе?</button>
-  <button class="symptom-btn" onclick="quickSearch('можно ли суши')">🍣 Можно ли суши?</button>
   <button class="symptom-btn" onclick="quickSearch('кашель')">😮‍💨 Кашель</button>
-  <button class="symptom-btn" onclick="quickSearch('аллергия')">🌸 Аллергия</button>
-  <button class="symptom-btn" onclick="quickSearch('боль')">💊 Боль</button>
-</div>
-
-<!-- КАТЕГОРИИ (свёртываемые) -->
-<div class="cat-toggle-row" onclick="toggleCats()" id="catToggleRow">
-  <span>📂 Все категории</span>
-  <span id="catToggleArrow">▼</span>
-</div>
-<div id="catGridWrap" style="display:none">
-  <div class="cat-grid" style="margin-top:10px">
-    <div class="cat-card" onclick="filterCat('обезболивающ')"><span class="cat-card-icon" style="background:#FFF0E8">💊</span><span class="cat-card-name">Обезболивающие</span></div>
-    <div class="cat-card" onclick="filterCat('антибиотик')"><span class="cat-card-icon" style="background:#E8F5E9">🦠</span><span class="cat-card-name">Антибиотики</span></div>
-    <div class="cat-card" onclick="filterCat('спазмолитик')"><span class="cat-card-icon" style="background:#F3E8FF">🫁</span><span class="cat-card-name">Спазмолитики</span></div>
-    <div class="cat-card" onclick="filterCat('пищеварени')"><span class="cat-card-icon" style="background:#FFF8E1">🫃</span><span class="cat-card-name">Пищеварение</span></div>
-    <div class="cat-card" onclick="filterCat('антигистамин')"><span class="cat-card-icon" style="background:#FCE4EC">🌸</span><span class="cat-card-name">Антигистаминные</span></div>
-    <div class="cat-card" onclick="filterCat('витамин')"><span class="cat-card-icon" style="background:#FFFDE7">💊</span><span class="cat-card-name">Витамины</span></div>
-    <div class="cat-card" onclick="setTypeFromCat('трава')"><span class="cat-card-icon" style="background:#F1F8E9">🌿</span><span class="cat-card-name">Все травы</span></div>
-    <div class="cat-card" onclick="setTypeFromCat('чай')"><span class="cat-card-icon" style="background:#FFF8E1">🍵</span><span class="cat-card-name">Все чаи</span></div>
-    <div class="cat-card" onclick="filterCat('рыба')"><span class="cat-card-icon" style="background:#E3F2FD">🐟</span><span class="cat-card-name">Рыба</span></div>
-    <div class="cat-card" onclick="filterCat('молочн')"><span class="cat-card-icon" style="background:#E8F5E9">🥛</span><span class="cat-card-name">Молочное</span></div>
-    <div class="cat-card" onclick="filterCat('кофе')"><span class="cat-card-icon" style="background:#EFEBE9">☕</span><span class="cat-card-name">Кофе</span></div>
-    <div class="cat-card" onclick="filterCat('алкоголь')"><span class="cat-card-icon" style="background:#FFEBEE">🍷</span><span class="cat-card-name">Алкоголь</span></div>
-  </div>
+  <button class="symptom-btn" onclick="quickSearch('аллергия')">🌸 Аллергия / зуд</button>
+  <button class="symptom-btn" onclick="quickSearch('боль')">💊 Боль / обезболить</button>
+  <button class="symptom-btn" onclick="quickSearch('изжога')">🔥 Изжога</button>
+  <button class="symptom-btn" onclick="quickSearch('бессонница')">🌙 Бессонница / тревога</button>
+  <button class="symptom-btn" onclick="quickSearch('отёки')">💧 Отёки</button>
+  <button class="symptom-btn" onclick="quickSearch('анемия')">🩸 Анемия / гемоглобин</button>
+  <button class="symptom-btn" onclick="quickSearch('тонус матки')">🫃 Тонус матки</button>
+  <button class="symptom-btn" onclick="quickSearch('цистит')">🚿 Цистит / моча</button>
+  <button class="symptom-btn" onclick="quickSearch('уменьшить молоко')">🤱 Уменьшить молоко</button>
+  <button class="symptom-btn" onclick="quickSearch('судороги в ногах')">🦵 Судороги в ногах</button>
 </div>
 ```
 
@@ -1763,7 +1731,11 @@ function renderResults(results, query) {
         <a href="https://www.rlsnet.ru" target="_blank" class="nf-link-btn">💊 Видаль — справочник лекарств</a>
       </div>
       <div style="font-size:11px;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.8px;margin:14px 0 8px">Не нашли ответ? Спросите наших специалистов:</div>
-      <a href="https://kormybaby.ru" target="_blank" class="nf-kormilitsa-btn">🤱 Консультация в центре «Кормилица»</a>
+      <a href="https://kormybaby.ru" target="_blank" class="nf-kormilitsa-btn">
+        <span style="font-size:18px">🤱</span>
+        <span>Задать вопрос консультанту Кормилицы</span>
+        <span style="margin-left:auto;font-size:16px">→</span>
+      </a>
     `;
     main.insertBefore(nf, document.getElementById('historyPanel'));
     return;
@@ -1897,11 +1869,16 @@ function renderHistoryList() {
 
 // ── СОХРАНЁННОЕ ──
 function saveItem(item) {
-  if (!item || savedItems.find(d => d.inn === item.inn)) return;
+  if (!item) return;
+  if (savedItems.find(d => d.inn === item.inn)) {
+    showToast('Уже сохранено ⭐');
+    return;
+  }
   savedItems.push({ inn:item.inn, type:item.type, sl:item.sl, se:item.se, ll:item.ll, le:item.le });
   localStorage.setItem('mz_saved', JSON.stringify(savedItems));
   renderSavedList();
   document.getElementById('savedPanel').style.display = 'block';
+  showToast('Сохранено в избранное ⭐');
 }
 
 function removeSaved(inn) {
@@ -1931,27 +1908,30 @@ function shareCard(inn) {
   const item = DB.find(d => d.inn === inn);
   if (!item) return;
 
-  const sit = situation === 'gv' ? 'при ГВ' : 'при беременности';
   const badge = situation === 'gv' ? item.ll : item.le;
-  const text = situation === 'gv' ? item.gl : item.ge;
+  const text  = situation === 'gv' ? item.gl  : item.ge;
+  const sitLabel = situation === 'gv' ? 'при ГВ' : 'при беременности';
 
-  const shareText = `МожноЛи? 🌿\n\n${item.inn}\n${badge}\n\n${text.substring(0, 200)}...\n\nПроверить другие: `;
-  const shareUrl = window.location.href;
+  // Базовый URL сайта
+  const baseUrl = window.location.origin + window.location.pathname;
+  // Кодируем название препарата в параметр чтобы при открытии сразу искалось
+  const shareUrl = baseUrl + '?q=' + encodeURIComponent(inn);
 
-  // Используем Web Share API если доступно (iOS/Android)
+  const shareTitle = `МожноЛи — ${item.inn} ${sitLabel}?`;
+  const shareText = `${item.inn} ${sitLabel}:\n${badge}\n\n${text.substring(0, 180).trim()}...\n\nПроверить: `;
+
   if (navigator.share) {
     navigator.share({
-      title: `МожноЛи — ${item.inn}`,
+      title: shareTitle,
       text: shareText,
       url: shareUrl
     }).catch(() => {});
   } else {
-    // Fallback — копировать в буфер
     const fullText = shareText + shareUrl;
     navigator.clipboard.writeText(fullText).then(() => {
-      showToast('Скопировано в буфер обмена!');
+      showToast('Скопировано! Вставьте в сообщение 📋');
     }).catch(() => {
-      showToast('Поделитесь ссылкой: ' + shareUrl);
+      prompt('Скопируйте ссылку:', shareUrl);
     });
   }
 }
@@ -1975,14 +1955,6 @@ function showToast(msg) {
   setTimeout(() => { toast.style.opacity = '0'; }, 2500);
 }
 
-function toggleCats() {
-  const wrap = document.getElementById('catGridWrap');
-  const arrow = document.getElementById('catToggleArrow');
-  const isHidden = wrap.style.display === 'none';
-  wrap.style.display = isHidden ? 'block' : 'none';
-  arrow.textContent = isHidden ? '▲' : '▼';
-}
-
 function togglePanel(bodyId, arrowId) {
   const body = document.getElementById(bodyId);
   const arrow = document.getElementById(arrowId);
@@ -1993,6 +1965,16 @@ function togglePanel(bodyId, arrowId) {
 window.addEventListener('DOMContentLoaded', () => {
   if (searchHistory.length) { document.getElementById('historyPanel').style.display = 'block'; renderHistoryList(); }
   if (savedItems.length) { document.getElementById('savedPanel').style.display = 'block'; renderSavedList(); }
+
+  // Если в URL есть ?q= — сразу искать (для ссылок из «Поделиться»)
+  const urlParams = new URLSearchParams(window.location.search);
+  const qParam = urlParams.get('q');
+  if (qParam) {
+    document.getElementById('searchInput').value = qParam;
+    const btn = document.getElementById('clearBtn');
+    if (btn) btn.style.display = 'block';
+    setTimeout(() => doSearch(), 300);
+  }
 });
 </script>
 
