@@ -1,0 +1,29 @@
+# МожноЛи — robots.txt
+
+# https://mojno-li.ru/
+
+User-agent: *
+Allow: /
+Disallow: /private/
+Disallow: /admin/
+
+# Sitemap
+
+Sitemap: https://mojno-li.ru/sitemap.xml
+
+# Яндекс — разрешить всё
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# Google — разрешить всё
+
+User-agent: Googlebot
+Allow: /
+
+# Bing
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 3
