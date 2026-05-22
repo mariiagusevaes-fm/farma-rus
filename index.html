@@ -12,7 +12,120 @@
 <!-- Apple Smart App Banner (нативный баннер iOS) -->
 <meta name="apple-itunes-app" content="app-id=ВАШЕ_APP_ID_IOS, app-argument=https://mojno-li.ru">
 <style>
-/* ── БАННЕР ПРИЛОЖЕНИЯ ── */
+/* ── TELEGRAM CHAT MODAL ── */
+.tg-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 9000;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+.tg-modal-overlay.open { display: flex; }
+
+.tg-modal {
+background: white;
+border-radius: 24px 24px 0 0;
+width: 100%;
+max-width: 560px;
+padding: 0 0 32px;
+animation: slideUp 0.3s ease;
+max-height: 92vh;
+overflow-y: auto;
+}
+
+.tg-modal-handle {
+width: 40px; height: 4px;
+background: #E0DCD4; border-radius: 2px;
+margin: 12px auto 0;
+}
+
+.tg-modal-header {
+display: flex; align-items: center; gap: 12px;
+padding: 20px 20px 16px;
+border-bottom: 1px solid #F0EDE6;
+}
+.tg-modal-icon {
+width: 48px; height: 48px; border-radius: 14px;
+background: linear-gradient(135deg, #2E5A26, #4A8A40);
+display: flex; align-items: center; justify-content: center;
+font-size: 22px; flex-shrink: 0;
+}
+.tg-modal-title { font-family: ‘Cormorant Garamond’, serif; font-size: 20px; font-weight: 500; color: var(–text); }
+.tg-modal-sub { font-size: 12px; color: var(–text-soft); margin-top: 2px; }
+.tg-modal-close {
+margin-left: auto; background: #F5F2EC; border: none;
+width: 32px; height: 32px; border-radius: 50%;
+font-size: 18px; cursor: pointer; color: var(–text-soft);
+display: flex; align-items: center; justify-content: center;
+flex-shrink: 0;
+}
+.tg-modal-close:hover { background: #EDE9E2; }
+
+.tg-modal-body { padding: 20px 20px 0; }
+
+.tg-step {
+display: flex; gap: 12px; margin-bottom: 20px; align-items: flex-start;
+}
+.tg-step-num {
+width: 28px; height: 28px; border-radius: 50%;
+background: var(–green-bg); color: var(–green-txt);
+font-size: 13px; font-weight: 700;
+display: flex; align-items: center; justify-content: center;
+flex-shrink: 0; margin-top: 1px;
+}
+.tg-step-text { font-size: 14px; color: var(–text); line-height: 1.5; }
+.tg-step-text strong { color: var(–text); }
+
+.tg-quick-btns {
+display: flex; flex-direction: column; gap: 8px;
+margin: 4px 0 20px;
+}
+.tg-quick-btn {
+background: #F5F2EC; border: 1.5px solid #EDE9E2;
+border-radius: 12px; padding: 11px 14px;
+font-family: ‘Manrope’, sans-serif; font-size: 13px;
+font-weight: 600; color: var(–text); cursor: pointer;
+text-align: left; transition: all 0.2s; width: 100%;
+}
+.tg-quick-btn:hover { background: var(–green-bg); border-color: #B8DFA8; color: var(–green-txt); }
+.tg-quick-btn .tg-btn-icon { margin-right: 8px; }
+
+.tg-main-btn {
+display: flex; align-items: center; justify-content: center; gap: 10px;
+width: 100%; padding: 15px;
+background: #229ED9; border: none; border-radius: 14px;
+color: white; font-family: ‘Manrope’, sans-serif;
+font-size: 15px; font-weight: 700; cursor: pointer;
+transition: opacity 0.2s; text-decoration: none;
+margin-top: 4px;
+}
+.tg-main-btn:hover { opacity: 0.92; }
+.tg-main-btn svg { flex-shrink: 0; }
+
+.tg-note {
+font-size: 11px; color: var(–text-soft); text-align: center;
+margin-top: 12px; line-height: 1.5;
+}
+
+/* Кнопка в хедере */
+.tg-header-btn {
+display: flex; align-items: center; gap: 6px;
+background: rgba(255,255,255,0.15);
+border: 1.5px solid rgba(255,255,255,0.3);
+border-radius: 20px; padding: 6px 13px;
+color: white; font-family: ‘Manrope’, sans-serif;
+font-size: 12px; font-weight: 700; cursor: pointer;
+transition: background 0.2s; white-space: nowrap;
+}
+.tg-header-btn:hover { background: rgba(255,255,255,0.25); }
+
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+</style>
+
+<style>
 #app-store-banner {
   display: none;
   background: linear-gradient(135deg, #2E5A26 0%, #4A8A40 100%);
@@ -55,6 +168,7 @@
   #app-store-banner { display: none !important; }
 }
 </style>
+
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="МожноЛи">
@@ -1829,7 +1943,83 @@ main {
       </div>
     </div>
   </a>
+  <button class="tg-header-btn" onclick="openTgChat()" title="Задать вопрос">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
+    Вопрос
+  </button>
 </header>
+
+<!-- ── TELEGRAM CHAT MODAL ── -->
+
+<div class="tg-modal-overlay" id="tgModal" onclick="closeTgModal(event)">
+  <div class="tg-modal" onclick="event.stopPropagation()">
+    <div class="tg-modal-handle"></div>
+    <div class="tg-modal-header">
+      <div class="tg-modal-icon">💬</div>
+      <div>
+        <div class="tg-modal-title">Задать вопрос</div>
+        <div class="tg-modal-sub">Ответим в Telegram в ближайшее время</div>
+      </div>
+      <button class="tg-modal-close" onclick="closeTgModal()" aria-label="Закрыть">×</button>
+    </div>
+
+```
+<div class="tg-modal-body">
+
+  <!-- Быстрые вопросы -->
+  <div style="font-size:12px;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px">
+    Популярные вопросы
+  </div>
+  <div class="tg-quick-btns">
+    <button class="tg-quick-btn" onclick="sendTgQuestion('Не нашла нужный препарат в базе — можете добавить?')">
+      <span class="tg-btn-icon">🔍</span> Не нашла препарат в базе
+    </button>
+    <button class="tg-quick-btn" onclick="sendTgQuestion('Информация о препарате кажется неточной — можете проверить?')">
+      <span class="tg-btn-icon">✏️</span> Информация кажется неточной
+    </button>
+    <button class="tg-quick-btn" onclick="sendTgQuestion('Хочу уточнить безопасность препарата при моей ситуации')">
+      <span class="tg-btn-icon">💊</span> Уточнить безопасность по моей ситуации
+    </button>
+    <button class="tg-quick-btn" onclick="sendTgQuestion('Есть предложение по улучшению приложения')">
+      <span class="tg-btn-icon">💡</span> Предложение по приложению
+    </button>
+  </div>
+
+  <!-- Инструкция -->
+  <div style="font-size:12px;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px">
+    Как это работает
+  </div>
+  <div class="tg-step">
+    <div class="tg-step-num">1</div>
+    <div class="tg-step-text">Нажми на вопрос выше или кнопку «Написать» — откроется Telegram с готовым сообщением</div>
+  </div>
+  <div class="tg-step">
+    <div class="tg-step-num">2</div>
+    <div class="tg-step-text">Отправь сообщение и добавь детали</div>
+  </div>
+  <div class="tg-step">
+    <div class="tg-step-num">3</div>
+    <div class="tg-step-text">Мы ответим вам в ближайшее время</div>
+  </div>
+
+  <!-- Главная кнопка -->
+  <a id="tg-open-btn" href="https://t.me/infoaccount1" target="_blank" class="tg-main-btn" onclick="closeTgModal()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64-6.8c-.15.58-2.39 11.52-2.7 13.06-.12.54-.35.72-.58.74-.49.04-1.03-.32-1.16-.43-.64-.44-2.68-1.71-3.18-2.07-.44-.31-.75-.63-.3-1.1.1-.1 2.04-1.87 4-3.72.2-.19.04-.4-.2-.24-2.08 1.34-4.38 2.82-5.23 3.38-.8.52-1.62.53-2.15.35C5 15.03 4.07 14.66 3.32 14.35 2.54 14.03 2 13.78 2 13.2c0-.53.54-.83 1.5-1.14C5.46 11.4 19.35 5.82 20 5.64c.4-.12.88.1.64 1.56z"/>
+    </svg>
+    Написать нам в Telegram
+  </a>
+
+  <div class="tg-note">
+    Вопрос откроется в приложении Telegram.<br>
+    Данные переписки хранятся только в Telegram.
+  </div>
+
+</div>
+```
+
+  </div>
+</div>
 
 <div class="hero">
   <div class="hero-tag">🌱 Справочник для беременных и кормящих</div>
@@ -2939,6 +3129,8 @@ let situation = 'gv';
 let currentType = 'all';
 let searchHistory = JSON.parse(localStorage.getItem('mz_history') || '[]');
 let savedItems = JSON.parse(localStorage.getItem('mz_saved') || '[]');
+// Запоминаем активный экран симптомов/типа для перерендера при смене режима
+let activeSymptomState = null; // { mode: 'symptom'|'type', tag, icon, label, type }
 
 const TYPE_CFG = {
   лекарство: { icon:'💊', cls:'лекарство', label:'Лекарство' },
@@ -2984,7 +3176,17 @@ function setSituation(s, el) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   const q = document.getElementById('searchInput').value.trim();
-  if (q) doSearch();
+  if (q) {
+    doSearch();
+  } else if (activeSymptomState) {
+    // Перерендерить текущий экран симптомов или типа с новым режимом
+    if (activeSymptomState.mode === 'symptom') {
+      showSymptomCards(activeSymptomState.tag, activeSymptomState.icon, activeSymptomState.label);
+    } else if (activeSymptomState.mode === 'type') {
+      var cfg = TYPE_CFG[activeSymptomState.type] || TYPE_CFG['продукт'];
+      showTypeCards(DB.filter(d => d.type === activeSymptomState.type), cfg.icon, cfg.label, activeSymptomState.type);
+    }
+  }
   renderSavedList();
 }
 
@@ -3084,12 +3286,54 @@ function clearAllResults() {
 
 function showEmpty() {
   clearAllResults();
+  activeSymptomState = null;
   document.getElementById('emptyState').style.display = 'block';
   document.getElementById('catSection').style.display = 'block';
 }
 
 function cutByWord(t,m){if(t.length<=m)return{short:t,rest:""};var c=t.lastIndexOf(" ",m);if(c<60)c=m;return{short:t.substring(0,c).trim()+"...",rest:t.substring(c).trim()};}
 function toggleMore(id,btn){var el=document.getElementById(id);if(!el)return;var h=el.style.display===""||el.style.display==="none";el.style.display=h?"block":"none";btn.textContent=h?"▲ Свернуть":"▼ Подробнее";}
+
+// ── TELEGRAM CHAT ──
+var TG_BOT = 'infoaccount1'; // Telegram аккаунт для поддержки
+
+function openTgChat(drugName) {
+  var modal = document.getElementById('tgModal');
+  // Если вызван из карточки препарата — добавляем контекст в быстрые кнопки
+  if (drugName) {
+    var extraBtn = document.getElementById('tg-drug-question');
+    if (!extraBtn) {
+      extraBtn = document.createElement('button');
+      extraBtn.id = 'tg-drug-question';
+      extraBtn.className = 'tg-quick-btn';
+      extraBtn.style.background = 'var(--green-bg)';
+      extraBtn.style.borderColor = '#B8DFA8';
+      extraBtn.style.color = 'var(--green-txt)';
+      document.querySelector('.tg-quick-btns').insertBefore(extraBtn, document.querySelector('.tg-quick-btns').firstChild);
+    }
+    extraBtn.innerHTML = '<span class="tg-btn-icon">💊</span> Вопрос про «' + drugName + '»';
+    extraBtn.onclick = function() { sendTgQuestion('Вопрос про препарат «' + drugName + '»: '); };
+  } else {
+    var extra = document.getElementById('tg-drug-question');
+    if (extra) extra.remove();
+  }
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTgModal(e) {
+  if (e && e.target !== document.getElementById('tgModal')) return;
+  document.getElementById('tgModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function sendTgQuestion(text) {
+  var url = 'https://t.me/' + TG_BOT + '?text=' + encodeURIComponent(text);
+  document.getElementById('tg-open-btn').href = url;
+  window.open(url, '_blank');
+  document.getElementById('tgModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
 // ── БАННЕР APP STORE / GOOGLE PLAY ──
 (function() {
@@ -3147,6 +3391,7 @@ function closeBanner() {
 }
 
 function showTypeCards(results, icon, label, type) {
+  activeSymptomState = { mode: 'type', type: type, icon: icon, label: label };
   var main = document.getElementById('main');
   clearAllResults();
   document.getElementById('emptyState').style.display = 'none';
@@ -3159,13 +3404,16 @@ function showTypeCards(results, icon, label, type) {
   });
 
   // Заголовок
+  var sitBadge = situation === 'bere'
+    ? '<span style="font-size:10px;background:var(--amber-bg);color:var(--amber-txt);padding:2px 8px;border-radius:20px;font-weight:700;white-space:nowrap">🤰 Беременность</span>'
+    : '<span style="font-size:10px;background:var(--green-bg);color:var(--green-txt);padding:2px 8px;border-radius:20px;font-weight:700;white-space:nowrap">🤱 Кормление</span>';
   var header = document.createElement('div');
   header.className = 'symptom-results-header';
   header.innerHTML =
     '<button class="back-btn" onclick="goHome()">← Назад</button>' +
     '<span class="symptom-results-icon">' + icon + '</span>' +
     '<span class="symptom-results-title">' + label + '</span>' +
-    '<span style="font-size:11px;color:var(--text-soft);font-weight:600;margin-left:auto">' + results.length + ' шт.</span>';
+    sitBadge;
   main.insertBefore(header, document.getElementById('historyPanel'));
 
   if (!results.length) {
@@ -3199,6 +3447,7 @@ function showTypeCards(results, icon, label, type) {
 
 // ── Показ карточек препаратов по симптому ──
 function showSymptomCards(tag, icon, label) {
+  activeSymptomState = { mode: 'symptom', tag: tag, icon: icon, label: label };
   var main = document.getElementById('main');
   // Убираем старые результаты
   document.querySelectorAll('.result-card, .not-found, .disclaimer, .alternatives-block, .consult-block, .results-bar, .symptom-results-header, .symptom-drug-grid').forEach(function(e){ e.remove(); });
@@ -3220,12 +3469,16 @@ function showSymptomCards(tag, icon, label) {
   });
 
   // Заголовок
+  var sitBadgeSym = situation === 'bere'
+    ? '<span style="font-size:10px;background:var(--amber-bg);color:var(--amber-txt);padding:2px 8px;border-radius:20px;font-weight:700;white-space:nowrap">🤰 Беременность</span>'
+    : '<span style="font-size:10px;background:var(--green-bg);color:var(--green-txt);padding:2px 8px;border-radius:20px;font-weight:700;white-space:nowrap">🤱 Кормление</span>';
   var header = document.createElement('div');
   header.className = 'symptom-results-header';
   header.innerHTML =
     '<button class="back-btn" onclick="goHome()">← Назад</button>' +
     '<span class="symptom-results-icon">' + icon + '</span>' +
-    '<span class="symptom-results-title">' + label + '</span>';
+    '<span class="symptom-results-title">' + label + '</span>' +
+    sitBadgeSym;
   main.insertBefore(header, document.getElementById('historyPanel'));
 
   if (!results.length) {
@@ -3345,7 +3598,7 @@ function shareCard(inn) {
 
   var badge = situation === 'gv' ? item.ll : item.le;
   var desc  = situation === 'gv' ? item.gl  : item.ge;
-  var sitLabel = situation === 'gv' ? 'при ГВ' : 'при беременности';
+  var sitLabel = situation === 'gv' ? 'при кормлении' : 'при беременности';
 
   var shareUrl = 'https://mojno-li.ru/?q=' + encodeURIComponent(inn);
 
@@ -3457,7 +3710,7 @@ function renderResults(results, query) {
 
     // ── Новые большие блоки статуса ──
     var statusRowHtml = '';
-    if (showGV)   statusRowHtml += renderStatusBlock(item.sl, '🤱', 'Грудное вскармливание', item.ll, yellowReasonGv);
+    if (showGV)   statusRowHtml += renderStatusBlock(item.sl, '🤱', 'Кормление грудью', item.ll, yellowReasonGv);
     if (showBere) statusRowHtml += renderStatusBlock(item.se, '🤰', 'Беременность', item.le, yellowReasonBere);
     var statusRow = statusRowHtml ? '<div class="safety-status-row">' + statusRowHtml + '</div>' : '';
 
@@ -3488,7 +3741,7 @@ function renderResults(results, query) {
 
     // ── Блок советов для жёлтых ──
     var adviceGv = item.sl === 'yellow' ?
-      '<div class="advice-block"><div class="advice-title">⚠️ Что учесть при ГВ</div><ul class="advice-list"><li>Принимать минимально эффективную дозу</li><li>Уточнить дозировку и срок у врача или консультанта</li><li>Наблюдать за реакцией малыша</li><li>Не принимать регулярно без необходимости</li></ul></div>' : '';
+      '<div class="advice-block"><div class="advice-title">⚠️ Что учесть при кормлении</div><ul class="advice-list"><li>Принимать минимально эффективную дозу</li><li>Уточнить дозировку и срок у врача или консультанта</li><li>Наблюдать за реакцией малыша</li><li>Не принимать регулярно без необходимости</li></ul></div>' : '';
     var adviceBere = item.se === 'yellow' ?
       '<div class="advice-block"><div class="advice-title">⚠️ Что учесть при беременности</div><ul class="advice-list"><li>Принимать только по назначению врача</li><li>Учитывать срок беременности — риски различаются по триместрам</li><li>Использовать минимальную эффективную дозу</li><li>Сообщить акушеру-гинекологу о приёме</li></ul></div>' : '';
 
@@ -3565,8 +3818,8 @@ function renderResults(results, query) {
       '</div>' +
       '<div class="card-consult">' +
         '<div class="card-consult-avatar"><svg width="18" height="18" viewBox="0 0 100 100" fill="none"><circle cx="62" cy="22" r="12" stroke="white" stroke-width="6" fill="none"/><circle cx="36" cy="30" r="8" stroke="white" stroke-width="6" fill="none"/><path d="M20 55 C15 45 18 35 28 35 C35 33 50 38 62 38 C75 38 82 48 78 60 C74 72 60 80 45 78 C30 76 22 68 20 55Z" stroke="white" stroke-width="6" fill="none"/></svg><div class="card-consult-dot"></div></div>' +
-        '<div class="card-consult-text"><div class="card-consult-title">Есть вопросы? Спросите специалиста</div><div class="card-consult-sub">Консультант по ГВ · Кормилица</div></div>' +
-        '<a href="https://kormybaby.ru" target="_blank" class="card-consult-link">Спросить →</a>' +
+        '<div class="card-consult-text"><div class="card-consult-title">Есть вопросы? Спросите специалиста</div><div class="card-consult-sub">Напишем в Telegram · быстро и бесплатно</div></div>' +
+        '<button onclick="openTgChat(\'' + item.inn.replace(/'/g,"\\'") + '\')" class="card-consult-link" style="border:none;cursor:pointer">Спросить →</button>' +
       '</div>';
 
     main.insertBefore(card, document.getElementById('historyPanel'));
@@ -3614,7 +3867,7 @@ function renderResults(results, query) {
       var altNote  = altIsYellow ? 'С осторожностью ' : 'Безопасны ';
       var chipIcon = altIsYellow ? '⚠️' : '✅';
       altBlock.innerHTML = '<div class="alternatives-title">' + altTitle + '</div>' +
-        '<div style="font-size:13px;color:var(--green-txt);margin-bottom:10px">' + altNote + (situation === 'gv' ? 'при ГВ' : 'при беременности') + ':</div>' +
+        '<div style="font-size:13px;color:var(--green-txt);margin-bottom:10px">' + altNote + (situation === 'gv' ? 'при кормлении' : 'при беременности') + ':</div>' +
         '<div>' + safeAlts.map(function(s){ return '<button class="alt-chip" onclick="quickSearch(\'' + s.inn.replace(/'/g,"\\'") + '\')">' + chipIcon + ' ' + s.inn + '</button>'; }).join('') + '</div>';
       main.insertBefore(altBlock, document.getElementById('historyPanel'));
     }
