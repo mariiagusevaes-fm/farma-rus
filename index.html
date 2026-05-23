@@ -3524,14 +3524,32 @@ function sendTgQuestion(text) {
 
 // ── БАННЕР APP STORE / GOOGLE PLAY ──
 (function() {
-  // Не показывать если уже закрыт, или если PWA/WebView
+  // Не показывать если уже закрыт
   if (localStorage.getItem('mz_banner_closed') === '1') return;
-  if (window.navigator.standalone) return; // iOS PWA
-  if (window.matchMedia('(display-mode: standalone)').matches) return; // Android PWA
 
   var ua = navigator.userAgent || '';
-  var isIOS = /iPhone|iPad|iPod/i.test(ua);
-  var isAndroid = /Android/i.test(ua);
+
+  // 1. iOS PWA (добавлено на рабочий стол)
+  if (window.navigator.standalone) return;
+
+  // 2. Android PWA / любой standalone режим
+  if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return;
+
+  // 3. Нативное iOS приложение (WebView внутри App Store приложения)
+  // У нативных WKWebView нет Safari в UA, и есть специфичные маркеры
+  var isSafari = /Safari/i.test(ua) && !/CriOS|FxiOS|EdgiOS/i.test(ua);
+  var isIOSDevice = /iPhone|iPad|iPod/i.test(ua);
+  if (isIOSDevice && !isSafari) return; // WKWebView без Safari = нативное приложение
+
+  // 4. Нативное Android приложение (WebView)
+  var isAndroidWebView = /Android/i.test(ua) && /wv\)|\.0\.0\.0/i.test(ua);
+  if (isAndroidWebView) return;
+
+  // 5. Дополнительная проверка — если есть кастомный флаг от приложения
+  if (window.isNativeApp || window.ReactNativeWebView || window.__NATIVE_APP__) return;
+
+  var isIOS = isIOSDevice && isSafari;
+  var isAndroid = /Android/i.test(ua) && !isAndroidWebView;
 
   // Ссылки — замените на реальные после публикации
   var IOS_URL = 'https://apps.apple.com/ru/app/mojno-li/idВАШ_APP_ID';
