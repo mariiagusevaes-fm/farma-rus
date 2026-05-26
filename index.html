@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
 <link rel="apple-touch-icon-precomposed" href="icon.png">
 <!-- Apple Smart App Banner (нативный баннер iOS) -->
-<meta name="apple-itunes-app" content="app-id=ВАШЕ_APP_ID_IOS, app-argument=https://mojno-li.ru">
+<meta name="apple-itunes-app" content="app-id=6770277628, app-argument=https://mojno-li.ru">
 <style>
 /* ── TELEGRAM CHAT MODAL ── */
 .tg-modal-overlay {
@@ -1954,6 +1954,23 @@ main {
 </head>
 <body>
 
+<!-- Yandex.Metrika counter -->
+
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109128872', 'ym');
+
+    ym(109128872, 'init', {ssr:true, webvisor:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+
+<noscript><div><img src="https://mc.yandex.ru/watch/109128872" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<!-- /Yandex.Metrika counter -->
+
 <!-- ── БАННЕР ПРИЛОЖЕНИЯ (только в браузере, не в PWA) ── -->
 
 <div id="app-store-banner">
@@ -3555,7 +3572,7 @@ function sendTgQuestion(text) {
   var isAndroid = /Android/i.test(ua) && !isAndroidWebView;
 
   // Ссылки — замените на реальные после публикации
-  var IOS_URL = 'https://apps.apple.com/ru/app/mojno-li/idВАШ_APP_ID';
+  var IOS_URL = 'https://apps.apple.com/ru/app/можноли/id6770277628';
   var ANDROID_URL = 'https://play.google.com/store/apps/details?id=ru.mojno_li&hl=ru';
 
   var appStoreBtn = '<a href="' + IOS_URL + '" target="_blank" class="asb-btn" id="asb-ios">' +
