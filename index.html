@@ -3,7 +3,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, shrink-to-fit=no">
 <title>МожноЛи</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
@@ -29,105 +29,233 @@
 .tg-modal-overlay.open { display: flex; }
 
 .tg-modal {
-background: white;
-border-radius: 24px 24px 0 0;
-width: 100%;
-max-width: 560px;
-padding: 0 0 32px;
-animation: slideUp 0.3s ease;
-max-height: 92vh;
-overflow-y: auto;
+  background: white;
+  border-radius: 24px 24px 0 0;
+  width: 100%;
+  max-width: 560px;
+  padding: 0 0 32px;
+  animation: slideUp 0.3s ease;
+  max-height: 92vh;
+  overflow-y: auto;
 }
 
 .tg-modal-handle {
-width: 40px; height: 4px;
-background: #E0DCD4; border-radius: 2px;
-margin: 12px auto 0;
+  width: 40px; height: 4px;
+  background: #E0DCD4; border-radius: 2px;
+  margin: 12px auto 0;
 }
 
 .tg-modal-header {
-display: flex; align-items: center; gap: 12px;
-padding: 20px 20px 16px;
-border-bottom: 1px solid #F0EDE6;
+  display: flex; align-items: center; gap: 12px;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid #F0EDE6;
 }
 .tg-modal-icon {
-width: 48px; height: 48px; border-radius: 14px;
-background: linear-gradient(135deg, #2E5A26, #4A8A40);
-display: flex; align-items: center; justify-content: center;
-font-size: 22px; flex-shrink: 0;
+  width: 48px; height: 48px; border-radius: 14px;
+  background: linear-gradient(135deg, #2E5A26, #4A8A40);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
 }
-.tg-modal-title { font-family: ‘Cormorant Garamond’, serif; font-size: 20px; font-weight: 500; color: var(–text); }
-.tg-modal-sub { font-size: 12px; color: var(–text-soft); margin-top: 2px; }
+.tg-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: var(--text); }
+.tg-modal-sub { font-size: 12px; color: var(--text-soft); margin-top: 2px; }
 .tg-modal-close {
-margin-left: auto; background: #F5F2EC; border: none;
-width: 32px; height: 32px; border-radius: 50%;
-font-size: 18px; cursor: pointer; color: var(–text-soft);
-display: flex; align-items: center; justify-content: center;
-flex-shrink: 0;
+  margin-left: auto; background: #F5F2EC; border: none;
+  width: 32px; height: 32px; border-radius: 50%;
+  font-size: 18px; cursor: pointer; color: var(--text-soft);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
 }
 .tg-modal-close:hover { background: #EDE9E2; }
 
 .tg-modal-body { padding: 20px 20px 0; }
 
 .tg-step {
-display: flex; gap: 12px; margin-bottom: 20px; align-items: flex-start;
+  display: flex; gap: 12px; margin-bottom: 20px; align-items: flex-start;
 }
 .tg-step-num {
-width: 28px; height: 28px; border-radius: 50%;
-background: var(–green-bg); color: var(–green-txt);
-font-size: 13px; font-weight: 700;
-display: flex; align-items: center; justify-content: center;
-flex-shrink: 0; margin-top: 1px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--green-bg); color: var(--green-txt);
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
 }
-.tg-step-text { font-size: 14px; color: var(–text); line-height: 1.5; }
-.tg-step-text strong { color: var(–text); }
+.tg-step-text { font-size: 14px; color: var(--text); line-height: 1.5; }
+.tg-step-text strong { color: var(--text); }
 
 .tg-quick-btns {
-display: flex; flex-direction: column; gap: 8px;
-margin: 4px 0 20px;
+  display: flex; flex-direction: column; gap: 8px;
+  margin: 4px 0 20px;
 }
 .tg-quick-btn {
-background: #F5F2EC; border: 1.5px solid #EDE9E2;
-border-radius: 12px; padding: 11px 14px;
-font-family: ‘Manrope’, sans-serif; font-size: 13px;
-font-weight: 600; color: var(–text); cursor: pointer;
-text-align: left; transition: all 0.2s; width: 100%;
+  background: #F5F2EC; border: 1.5px solid #EDE9E2;
+  border-radius: 12px; padding: 11px 14px;
+  font-family: 'Manrope', sans-serif; font-size: 13px;
+  font-weight: 600; color: var(--text); cursor: pointer;
+  text-align: left; transition: all 0.2s; width: 100%;
 }
-.tg-quick-btn:hover { background: var(–green-bg); border-color: #B8DFA8; color: var(–green-txt); }
+.tg-quick-btn:hover { background: var(--green-bg); border-color: #B8DFA8; color: var(--green-txt); }
 .tg-quick-btn .tg-btn-icon { margin-right: 8px; }
 
 .tg-main-btn {
-display: flex; align-items: center; justify-content: center; gap: 10px;
-width: 100%; padding: 15px;
-background: #229ED9; border: none; border-radius: 14px;
-color: white; font-family: ‘Manrope’, sans-serif;
-font-size: 15px; font-weight: 700; cursor: pointer;
-transition: opacity 0.2s; text-decoration: none;
-margin-top: 4px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 15px;
+  background: #229ED9; border: none; border-radius: 14px;
+  color: white; font-family: 'Manrope', sans-serif;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: opacity 0.2s; text-decoration: none;
+  margin-top: 4px;
 }
 .tg-main-btn:hover { opacity: 0.92; }
 .tg-main-btn svg { flex-shrink: 0; }
 
 .tg-note {
-font-size: 11px; color: var(–text-soft); text-align: center;
-margin-top: 12px; line-height: 1.5;
+  font-size: 11px; color: var(--text-soft); text-align: center;
+  margin-top: 12px; line-height: 1.5;
 }
 
 /* Кнопка в хедере */
 .tg-header-btn {
-display: flex; align-items: center; gap: 6px;
-background: rgba(255,255,255,0.15);
-border: 1.5px solid rgba(255,255,255,0.3);
-border-radius: 20px; padding: 6px 13px;
-color: white; font-family: ‘Manrope’, sans-serif;
-font-size: 12px; font-weight: 700; cursor: pointer;
-transition: background 0.2s; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 20px; padding: 6px 13px;
+  color: white; font-family: 'Manrope', sans-serif;
+  font-size: 12px; font-weight: 700; cursor: pointer;
+  transition: background 0.2s; white-space: nowrap;
 }
 .tg-header-btn:hover { background: rgba(255,255,255,0.25); }
 
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-</style>
 
+/* ── ФОРМА ВОПРОСА СПЕЦИАЛИСТУ ── */
+.ask-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 9100;
+  align-items: flex-end;
+  justify-content: center;
+}
+.ask-modal-overlay.open { display: flex; }
+.ask-modal {
+  background: white;
+  border-radius: 24px 24px 0 0;
+  width: 100%;
+  max-width: 560px;
+  padding: 0 0 32px;
+  max-height: 92vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+}
+.ask-modal-handle {
+  width: 40px; height: 4px;
+  background: #E0DCD4; border-radius: 2px;
+  margin: 12px auto 0;
+}
+.ask-modal-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid #F0EDE6;
+}
+.ask-modal-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: linear-gradient(135deg, #2E5A26, #4A8A40);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.ask-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: var(--text); }
+.ask-modal-drug { font-size: 12px; color: var(--text-soft); margin-top: 2px; }
+.ask-modal-close {
+  margin-left: auto; background: #F5F2EC; border: none;
+  width: 32px; height: 32px; border-radius: 50%;
+  font-size: 18px; cursor: pointer; color: var(--text-soft);
+  display: flex; align-items: center; justify-content: center;
+}
+.ask-modal-body { padding: 18px 20px 0; }
+.ask-field { margin-bottom: 14px; }
+.ask-field label {
+  display: block; font-size: 12px; font-weight: 700;
+  color: var(--text-soft); margin-bottom: 6px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.ask-field input, .ask-field textarea {
+  width: 100%; box-sizing: border-box;
+  border: 1.5px solid #E5E0D8; border-radius: 12px;
+  padding: 11px 14px; font-size: 14px;
+  font-family: 'Manrope', sans-serif; color: var(--text);
+  background: #FAFAF8; outline: none;
+  transition: border-color 0.2s;
+}
+.ask-field input:focus, .ask-field textarea:focus {
+  border-color: #4A8A40;
+}
+.ask-field textarea { resize: none; height: 90px; }
+.ask-send-btn {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, #2E5A26, #4A8A40);
+  border: none; border-radius: 14px;
+  color: white; font-family: 'Manrope', sans-serif;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: opacity 0.2s; margin-top: 4px;
+}
+.ask-send-btn:hover { opacity: 0.9; }
+.ask-send-btn:disabled { opacity: 0.6; cursor: default; }
+.ask-success {
+  text-align: center; padding: 24px 20px;
+  display: none;
+}
+.ask-success-icon { font-size: 48px; margin-bottom: 12px; }
+.ask-success-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.ask-success-sub { font-size: 13px; color: var(--text-soft); }
+.ask-note { font-size: 11px; color: var(--text-soft); text-align: center; margin-top: 12px; }
+
+/* ── БЛОК ДОВЕРИЯ ── */
+.trust-row {
+  display: flex;
+  align-items: stretch;
+  background: rgba(255,255,255,0.13);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin: 12px 0 16px;
+  gap: 0;
+}
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+  gap: 4px;
+  padding: 0 6px;
+}
+.trust-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+.trust-label {
+  font-size: 9px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+}
+.trust-value {
+  font-size: 11px;
+  color: white;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.trust-divider {
+  width: 1px;
+  background: rgba(255,255,255,0.2);
+  margin: 2px 0;
+  flex-shrink: 0;
+}
+</style>
 <style>
 #app-store-banner {
   display: none;
@@ -171,14 +299,13 @@ transition: background 0.2s; white-space: nowrap;
   #app-store-banner { display: none !important; }
 }
 </style>
-
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="МожноЛи">
 <meta name="theme-color" content="#7BAE6E">
 
-  <!-- ══ SEO: ОСНОВНЫЕ МЕТА-ТЕГИ ══ -->
 
+  <!-- ══ SEO: ОСНОВНЫЕ МЕТА-ТЕГИ ══ -->
   <meta name="description" content="МожноЛи — проверьте безопасность любого лекарства, травы, продукта при беременности и кормлении грудью. 922+ позиций, бесплатно, без регистрации.">
   <meta name="keywords" content="можно ли при беременности, можно ли при грудном вскармливании, лекарства при беременности, лекарства при кормлении грудью, что можно беременным, что нельзя при ГВ, безопасность лекарств беременность, парацетамол при беременности, но-шпа при беременности, ибупрофен при кормлении, антибиотики при грудном вскармливании, травы при беременности, что есть при беременности, можно ли при ГВ">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -188,16 +315,13 @@ transition: background 0.2s; white-space: nowrap;
   <link rel="canonical" href="https://mojno-li.ru/">
 
   <!-- ══ ЯНДЕКС ══ -->
-
   <meta name="yandex-verification" content="ВСТАВЬТЕ_КОД_ИЗ_ЯНДЕКС_ВЕБМАСТЕР">
   <meta name="yandex" content="noarchive">
 
   <!-- ══ GOOGLE SEARCH CONSOLE ══ -->
-
   <meta name="google-site-verification" content="ВСТАВЬТЕ_КОД_ИЗ_GOOGLE_SEARCH_CONSOLE">
 
   <!-- ══ OPEN GRAPH ══ -->
-
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mojno-li.ru/">
   <meta property="og:title" content="МожноЛи — можно ли это при беременности и кормлении грудью?">
@@ -210,14 +334,12 @@ transition: background 0.2s; white-space: nowrap;
   <meta property="og:site_name" content="МожноЛи">
 
   <!-- ══ TWITTER CARD ══ -->
-
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="МожноЛи — безопасность лекарств при беременности и кормлении">
   <meta name="twitter:description" content="922+ лекарств, трав и продуктов. Проверьте что можно, а что нельзя.">
   <meta name="twitter:image" content="https://mojno-li.ru/og-image.png">
 
   <!-- ══ SCHEMA.ORG: WebApplication ══ -->
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -240,7 +362,6 @@ transition: background 0.2s; white-space: nowrap;
   </script>
 
   <!-- ══ SCHEMA.ORG: MedicalWebPage ══ -->
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -256,7 +377,6 @@ transition: background 0.2s; white-space: nowrap;
   </script>
 
   <!-- ══ SCHEMA.ORG: SiteLinksSearchBox ══ -->
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -271,7 +391,6 @@ transition: background 0.2s; white-space: nowrap;
   </script>
 
   <!-- ══ FAQ: РАСШИРЕННЫЕ СНИППЕТЫ В ЯНДЕКС И GOOGLE (44 вопроса) ══ -->
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -359,6 +478,9 @@ body {
   background: var(--cream);
   color: var(--text);
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 
@@ -1107,14 +1229,23 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   max-width: 100vw;
+  width: 100%;
+  position: relative;
 }
 
 /* Предотвратить горизонтальный скролл */
 html {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   max-width: 100vw;
+  width: 100%;
+}
+
+/* Жёсткая защита всех элементов */
+*, *::before, *::after {
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .hero {
@@ -1213,7 +1344,7 @@ header {
 /* ── ГЕРОЙ ── */
 .hero {
   background: linear-gradient(160deg, #6A9E5C 0%, #88BB78 45%, #A8CF98 100%);
-  padding: 40px 20px 32px;
+  padding: 28px 16px 24px;
   text-align: center;
   position: relative;
   overflow: visible;
@@ -1955,7 +2086,6 @@ main {
 <body>
 
 <!-- Yandex.Metrika counter -->
-
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -1966,13 +2096,49 @@ main {
 
     ym(109128872, 'init', {ssr:true, webvisor:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
 </script>
-
 <noscript><div><img src="https://mc.yandex.ru/watch/109128872" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-
 <!-- /Yandex.Metrika counter -->
 
-<!-- ── БАННЕР ПРИЛОЖЕНИЯ (только в браузере, не в PWA) ── -->
+<!-- ── ФОРМА ВОПРОСА СПЕЦИАЛИСТУ ── -->
+<div class="ask-modal-overlay" id="askModal" onclick="closeAskModal(event)">
+  <div class="ask-modal" onclick="event.stopPropagation()">
+    <div class="ask-modal-handle"></div>
+    <div class="ask-modal-header">
+      <div class="ask-modal-icon">✉️</div>
+      <div>
+        <div class="ask-modal-title">Задать вопрос специалисту</div>
+        <div class="ask-modal-drug" id="askDrugName"></div>
+      </div>
+      <button class="ask-modal-close" onclick="closeAskModal()" aria-label="Закрыть">×</button>
+    </div>
 
+    <div class="ask-modal-body" id="askFormBody">
+      <div class="ask-field">
+        <label>Ваш вопрос</label>
+        <textarea id="askQuestion" placeholder="Опишите ситуацию: срок беременности или возраст ребёнка, что беспокоит, дозировка..."></textarea>
+      </div>
+      <div class="ask-field">
+        <label>Ваш email (для ответа)</label>
+        <input type="email" id="askEmail" placeholder="example@mail.ru">
+      </div>
+      <button class="ask-send-btn" id="askSendBtn" onclick="sendAskForm()">
+        Отправить вопрос
+      </button>
+      <div class="ask-note">
+        Отвечаем в течение 1–2 рабочих дней.<br>
+        Консультация бесплатна.
+      </div>
+    </div>
+
+    <div class="ask-success" id="askSuccess">
+      <div class="ask-success-icon">✅</div>
+      <div class="ask-success-title">Вопрос отправлен!</div>
+      <div class="ask-success-sub">Мы ответим на ваш email в течение 1–2 рабочих дней.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── БАННЕР ПРИЛОЖЕНИЯ (только в браузере, не в PWA) ── -->
 <div id="app-store-banner">
   <div class="asb-icon">🌿</div>
   <div class="asb-text">
@@ -2015,7 +2181,6 @@ main {
 </header>
 
 <!-- ── TELEGRAM CHAT MODAL ── -->
-
 <div class="tg-modal-overlay" id="tgModal" onclick="closeTgModal(event)">
   <div class="tg-modal" onclick="event.stopPropagation()">
     <div class="tg-modal-handle"></div>
@@ -2028,62 +2193,59 @@ main {
       <button class="tg-modal-close" onclick="closeTgModal()" aria-label="Закрыть">×</button>
     </div>
 
-```
-<div class="tg-modal-body">
+    <div class="tg-modal-body">
 
-  <!-- Быстрые вопросы -->
-  <div style="font-size:12px;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px">
-    Популярные вопросы
-  </div>
-  <div class="tg-quick-btns">
-    <button class="tg-quick-btn" onclick="sendTgQuestion('Не нашла нужный препарат в базе — можете добавить?')">
-      <span class="tg-btn-icon">🔍</span> Не нашла препарат в базе
-    </button>
-    <button class="tg-quick-btn" onclick="sendTgQuestion('Информация о препарате кажется неточной — можете проверить?')">
-      <span class="tg-btn-icon">✏️</span> Информация кажется неточной
-    </button>
-    <button class="tg-quick-btn" onclick="sendTgQuestion('Хочу уточнить безопасность препарата при моей ситуации')">
-      <span class="tg-btn-icon">💊</span> Уточнить безопасность по моей ситуации
-    </button>
-    <button class="tg-quick-btn" onclick="sendTgQuestion('Есть предложение по улучшению приложения')">
-      <span class="tg-btn-icon">💡</span> Предложение по приложению
-    </button>
-  </div>
+      <!-- Быстрые вопросы -->
+      <div style="font-size:12px;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px">
+        Популярные вопросы
+      </div>
+      <div class="tg-quick-btns">
+        <button class="tg-quick-btn" onclick="sendTgQuestion('Не нашла нужный препарат в базе — можете добавить?')">
+          <span class="tg-btn-icon">🔍</span> Не нашла препарат в базе
+        </button>
+        <button class="tg-quick-btn" onclick="sendTgQuestion('Информация о препарате кажется неточной — можете проверить?')">
+          <span class="tg-btn-icon">✏️</span> Информация кажется неточной
+        </button>
+        <button class="tg-quick-btn" onclick="sendTgQuestion('Хочу уточнить безопасность препарата при моей ситуации')">
+          <span class="tg-btn-icon">💊</span> Уточнить безопасность по моей ситуации
+        </button>
+        <button class="tg-quick-btn" onclick="sendTgQuestion('Есть предложение по улучшению приложения')">
+          <span class="tg-btn-icon">💡</span> Предложение по приложению
+        </button>
+      </div>
 
-  <!-- Инструкция -->
-  <div style="font-size:12px;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px">
-    Как это работает
-  </div>
-  <div class="tg-step">
-    <div class="tg-step-num">1</div>
-    <div class="tg-step-text">Нажмите на вопрос выше или кнопку «Написать» — откроется Telegram с готовым сообщением</div>
-  </div>
-  <div class="tg-step">
-    <div class="tg-step-num">2</div>
-    <div class="tg-step-text">Отправьте сообщение и добавьте детали</div>
-  </div>
-  <div class="tg-step">
-    <div class="tg-step-num">3</div>
-    <div class="tg-step-text">Мы ответим вам в ближайшее время</div>
-  </div>
+      <!-- Инструкция -->
+      <div style="font-size:12px;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px">
+        Как это работает
+      </div>
+      <div class="tg-step">
+        <div class="tg-step-num">1</div>
+        <div class="tg-step-text">Нажмите на вопрос выше или кнопку «Написать» — откроется Telegram с готовым сообщением</div>
+      </div>
+      <div class="tg-step">
+        <div class="tg-step-num">2</div>
+        <div class="tg-step-text">Отправьте сообщение и добавьте детали</div>
+      </div>
+      <div class="tg-step">
+        <div class="tg-step-num">3</div>
+        <div class="tg-step-text">Мы ответим вам в ближайшее время</div>
+      </div>
 
-  <!-- Главная кнопка -->
-  <a id="tg-open-btn" href="https://t.me/infoaccount1" target="_blank" class="tg-main-btn" onclick="closeTgModal()">
-    <svg width="22" height="22" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="120" cy="120" r="120" fill="none"/>
-      <path d="M178 71L152.6 168.2c-1.8 7.2-6.6 9-13.4 5.6l-37-28-17.8 17.2c-2 2-3.6 3.6-7.4 3.6l2.6-37.8L153 75.6c2.8-2.6-.6-4-4.4-1.4L65.8 128.4l-36.4-11.4c-7.8-2.4-8-7.8 1.8-11.6l135.6-52.2c6.4-2.4 12.2 1.6 11.2 11.8z" fill="white"/>
-    </svg>
-    Написать нам в Telegram
-  </a>
+      <!-- Главная кнопка -->
+      <a id="tg-open-btn" href="https://t.me/infoaccount1" target="_blank" class="tg-main-btn" onclick="closeTgModal()">
+        <svg width="22" height="22" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="120" cy="120" r="120" fill="none"/>
+          <path d="M178 71L152.6 168.2c-1.8 7.2-6.6 9-13.4 5.6l-37-28-17.8 17.2c-2 2-3.6 3.6-7.4 3.6l2.6-37.8L153 75.6c2.8-2.6-.6-4-4.4-1.4L65.8 128.4l-36.4-11.4c-7.8-2.4-8-7.8 1.8-11.6l135.6-52.2c6.4-2.4 12.2 1.6 11.2 11.8z" fill="white"/>
+        </svg>
+        Написать нам в Telegram
+      </a>
 
-  <div class="tg-note">
-    Вопрос откроется в приложении Telegram.<br>
-    Данные переписки хранятся только в Telegram.
-  </div>
+      <div class="tg-note">
+        Вопрос откроется в приложении Telegram.<br>
+        Данные переписки хранятся только в Telegram.
+      </div>
 
-</div>
-```
-
+    </div>
   </div>
 </div>
 
@@ -2091,6 +2253,27 @@ main {
   <div class="hero-tag">🌱 Справочник для беременных и кормящих</div>
   <h1>Можно ли мне это <strong>принять или съесть</strong>?</h1>
   <p>Лекарства, травы, чаи и продукты — проверьте безопасность без страха и форумов</p>
+
+  <!-- Блок доверия -->
+  <div class="trust-row">
+    <div class="trust-item">
+      <span class="trust-icon">👩‍⚕️</span>
+      <span class="trust-label">Проверено</span>
+      <span class="trust-value">Врачами и консультантами ГВ</span>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <span class="trust-icon">📚</span>
+      <span class="trust-label">Источники</span>
+      <span class="trust-value">ГРЛС, LactMed, ВОЗ</span>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <span class="trust-icon">🔒</span>
+      <span class="trust-label">Не ИИ</span>
+      <span class="trust-value">Проверенная база данных</span>
+    </div>
+  </div>
 
   <div class="search-wrap">
     <div class="type-filter">
@@ -2146,7 +2329,6 @@ main {
   <div class="categories" id="catSection">
 
 <!-- ТОП ЗАПРОСОВ -->
-
 <div class="categories-title" style="margin-bottom:10px">🔥 Топ запросов</div>
 <div class="top-queries-grid">
   <div class="tq-card" onclick="quickSearch('Парацетамол')"><span class="tq-icon">🌡️</span><span class="tq-name">Парацетамол</span></div>
@@ -2160,7 +2342,6 @@ main {
 </div>
 
 <!-- СИМПТОМЫ -->
-
 <div class="categories-title" style="margin-top:20px;margin-bottom:10px">🩺 Поиск по симптому</div>
 <div class="symptoms-grid">
   <button class="symptom-btn" onclick="showSymptomCards('температура','🌡️','Температура')">🌡️ Температура</button>
@@ -3501,6 +3682,104 @@ function showEmpty() {
 function cutByWord(t,m){if(t.length<=m)return{short:t,rest:""};var c=t.lastIndexOf(" ",m);if(c<60)c=m;return{short:t.substring(0,c).trim()+"...",rest:t.substring(c).trim()};}
 function toggleMore(id,btn){var el=document.getElementById(id);if(!el)return;var h=el.style.display===""||el.style.display==="none";el.style.display=h?"block":"none";btn.textContent=h?"▲ Свернуть":"▼ Подробнее";}
 
+// ── ФОРМА ВОПРОСА СПЕЦИАЛИСТУ (Formspree) ──
+var FORMSPREE_URL = 'https://formspree.io/f/mdavgega';
+
+function openAskForm(drugName) {
+  var modal = document.getElementById('askModal');
+  var formBody = document.getElementById('askFormBody');
+  var success = document.getElementById('askSuccess');
+  formBody.style.display = 'block';
+  success.style.display = 'none';
+  document.getElementById('askQuestion').value = '';
+  document.getElementById('askEmail').value = '';
+  var btn = document.getElementById('askSendBtn');
+  btn.disabled = false;
+  btn.textContent = 'Отправить вопрос';
+  var drugLabel = document.getElementById('askDrugName');
+  if (drugName) {
+    drugLabel.textContent = '💊 ' + drugName;
+    document.getElementById('askQuestion').placeholder =
+      'Вопрос про «' + drugName + '»: опишите ситуацию, срок беременности или возраст ребёнка...';
+  } else {
+    drugLabel.textContent = '';
+  }
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAskModal(e) {
+  if (e && e.target !== document.getElementById('askModal')) return;
+  document.getElementById('askModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function sendAskForm() {
+  var question = document.getElementById('askQuestion').value.trim();
+  var email    = document.getElementById('askEmail').value.trim();
+  var drug     = document.getElementById('askDrugName').textContent;
+  var btn      = document.getElementById('askSendBtn');
+
+  if (!question) {
+    document.getElementById('askQuestion').style.borderColor = '#e05050';
+    document.getElementById('askQuestion').focus();
+    return;
+  }
+  if (!email || !email.includes('@')) {
+    document.getElementById('askEmail').style.borderColor = '#e05050';
+    document.getElementById('askEmail').focus();
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+
+  var data = {
+    drug:      drug || 'не указан',
+    situation: situation === 'gv' ? 'Кормление грудью' : 'Беременность',
+    question:  question,
+    email:     email
+  };
+
+  // Если Formspree настроен — отправляем через него
+  if (FORMSPREE_URL.indexOf('ВСТАВИТЬ') === -1) {
+    fetch(FORMSPREE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function(r) {
+      if (r.ok) { showAskSuccess(); }
+      else { fallbackMailto(data); }
+    })
+    .catch(function() { fallbackMailto(data); });
+  } else {
+    // Fallback: открываем почтовый клиент
+    fallbackMailto(data);
+  }
+}
+
+function fallbackMailto(data) {
+  var subject = encodeURIComponent('Вопрос из МожноЛи: ' + data.drug);
+  var body = encodeURIComponent(
+    'Препарат: ' + data.drug + '\n' +
+    'Режим: ' + data.situation + '\n' +
+    'Email пользователя: ' + data.email + '\n\n' +
+    'Вопрос:\n' + data.question
+  );
+  window.open('mailto:mariia.guseva.es@gmail.com?subject=' + subject + '&body=' + body, '_blank');
+  showAskSuccess();
+}
+
+function showAskSuccess() {
+  document.getElementById('askFormBody').style.display = 'none';
+  document.getElementById('askSuccess').style.display = 'block';
+  setTimeout(function() {
+    document.getElementById('askModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }, 3000);
+}
+
 // ── TELEGRAM CHAT ──
 var TG_BOT = 'infoaccount1'; // Telegram аккаунт для поддержки
 
@@ -4081,8 +4360,8 @@ function renderResults(results, query) {
       '</div>' +
       '<div class="card-consult">' +
         '<div class="card-consult-avatar"><svg width="18" height="18" viewBox="0 0 100 100" fill="none"><circle cx="62" cy="22" r="12" stroke="white" stroke-width="6" fill="none"/><circle cx="36" cy="30" r="8" stroke="white" stroke-width="6" fill="none"/><path d="M20 55 C15 45 18 35 28 35 C35 33 50 38 62 38 C75 38 82 48 78 60 C74 72 60 80 45 78 C30 76 22 68 20 55Z" stroke="white" stroke-width="6" fill="none"/></svg><div class="card-consult-dot"></div></div>' +
-        '<div class="card-consult-text"><div class="card-consult-title">Есть вопросы? Спросите специалиста</div><div class="card-consult-sub">Напишем в Telegram · быстро и бесплатно</div></div>' +
-        '<button onclick="openTgChat(\'' + item.inn.replace(/'/g,"\\'") + '\')" class="card-consult-link" style="border:none;cursor:pointer">Спросить →</button>' +
+        '<div class="card-consult-text"><div class="card-consult-title">Есть вопросы? Спросите специалиста</div><div class="card-consult-sub">Ответим на почту · бесплатно</div></div>' +
+        '<button onclick="openAskForm(\'' + item.inn.replace(/'/g,"\\'") + '\')" class="card-consult-link" style="border:none;cursor:pointer">Спросить →</button>' +
       '</div>';
 
     main.insertBefore(card, document.getElementById('historyPanel'));
